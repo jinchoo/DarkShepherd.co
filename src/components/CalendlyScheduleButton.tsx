@@ -71,6 +71,30 @@ export function CalendlyScheduleButton({
         // If the user clicks before Calendly becomes ready, open as soon as it flips to ready.
         pendingOpenRef.current = true;
         warmCalendlyOnce();
+
+        // Guard against a race: the user might click before the "ready" subscription runs.
+        // Poll briefly and open as soon as Calendly is ready (script already warming in useEffect).
+        const start = Date.now();
+        const pollId = window.setInterval(() => {
+          if (!pendingOpenRef.current) {
+            window.clearInterval(pollId);
+            return;
+          }
+
+          if (isCalendlyReady()) {
+            pendingOpenRef.current = false;
+            window.clearInterval(pollId);
+            openCalendlyNow();
+            openingRef.current = false;
+            return;
+          }
+
+          if (Date.now() - start > 3000) {
+            pendingOpenRef.current = false;
+            window.clearInterval(pollId);
+            openingRef.current = false;
+          }
+        }, 50);
       }
     } catch (err) {
       openingRef.current = false;
