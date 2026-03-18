@@ -8,8 +8,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-space-grotesk), var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +20,86 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
 }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at left center,
+    rgba(7, 10, 18, 0.92) 0%,
+    rgba(7, 10, 18, 0.85) 40%,
+    rgba(7, 10, 18, 0.6) 70%,
+    rgba(7, 10, 18, 0.3) 100%
+  );
+}
+
+@keyframes paw-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+.paw-pulse {
+  animation: paw-pulse 2.5s ease-in-out infinite;
+}
+.paw-pulse-delay-1 { animation-delay: 0.4s; }
+.paw-pulse-delay-2 { animation-delay: 0.8s; }
+.paw-pulse-delay-3 { animation-delay: 1.2s; }
+.paw-pulse-delay-4 { animation-delay: 1.6s; }
+.paw-pulse-delay-5 { animation-delay: 2s; }
+
+/* Smooth scroll-like page transition (slide up) when using View Transitions API */
+@supports (view-transition-name: none) {
+  @keyframes view-transition-slide-out-up {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-16%);
+      opacity: 0;
+    }
+  }
+  @keyframes view-transition-slide-in-up {
+    from {
+      transform: translateY(16%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  ::view-transition-old(root) {
+    animation: view-transition-slide-out-up 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  ::view-transition-new(root) {
+    animation: view-transition-slide-in-up 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+}
+
+/* Keep Calendly visible above app content, but avoid aggressive layout overrides. */
+.calendly-overlay,
+.calendly-modal,
+.calendly-popup {
+  z-index: 999999 !important;
+}
+
+/* Make the embedded widget slightly inset so "Time" isn't flush */
+.calendly-popup iframe[src*="calendly.com"],
+#calendly-modal iframe[src*="calendly.com"],
+.calendly-modal iframe[src*="calendly.com"] {
+  width: calc(100vw - 56px) !important;
+  height: calc(100vh - 56px) !important;
+  max-height: calc(100vh - 56px) !important;
+  border: 0 !important;
+}
+
