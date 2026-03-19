@@ -155,7 +155,7 @@ export default function WhyItMattersPage() {
         <PawScrollButton
           href="/what-we-check"
           ariaLabel="Go to What We Check"
-          position="lowest"
+          position="higher"
         />
       </main>
     </div>
