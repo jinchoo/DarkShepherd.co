@@ -83,8 +83,8 @@ export default function WhatWeCheckPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto max-w-[1380px] px-8 pb-24 pt-8 md:px-12 md:pt-10">
-        <div className="mx-auto mb-5 flex max-w-[760px] justify-center">
+      <section className="relative z-10 mx-auto max-w-[1380px] px-8 pb-24 pt-7 md:px-12 md:pt-9">
+        <div className="mx-auto mb-4 flex max-w-[760px] justify-center">
           <SmoothLink
             href="/why-it-matters"
             className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
@@ -93,7 +93,7 @@ export default function WhatWeCheckPage() {
           </SmoothLink>
         </div>
 
-        <div className="mx-auto mt-6 max-w-[820px] text-center md:mt-12">
+        <div className="mx-auto mt-5 max-w-[820px] text-center md:mt-10">
           <p className="text-center">
             <span
               className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
@@ -128,7 +128,7 @@ export default function WhatWeCheckPage() {
           </p>
         </div>
 
-        <div className="mt-14 mx-auto grid w-full max-w-[920px] grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="mt-12 mx-auto grid w-full max-w-[920px] grid-cols-1 gap-5 md:grid-cols-2">
           <div className="rounded-[24px] border border-white/15 bg-white/[0.05] px-7 pt-8 pb-4 text-left backdrop-blur-sm min-h-[190px]">
             <h2 className="text-[24px] font-semibold bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
               App Permissions &amp; Data Access
