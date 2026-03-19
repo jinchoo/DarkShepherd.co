@@ -39,9 +39,29 @@ export async function loadCalendlyWidgetScript(): Promise<void> {
     markCalendlyReady();
     return;
   }
-  if (calendlyScriptLoadPromise) return calendlyScriptLoadPromise;
+
+  // If a previous load failed, the stored promise rejects forever — clear and retry.
+  if (calendlyScriptLoadPromise) {
+    try {
+      await calendlyScriptLoadPromise;
+      return;
+    } catch {
+      calendlyScriptLoadPromise = null;
+    }
+  }
 
   calendlyScriptLoadPromise = new Promise<void>((resolve, reject) => {
+    let intervalId: ReturnType<typeof window.setInterval> | undefined;
+
+    const fail = (err: Error) => {
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+      document
+        .querySelectorAll<HTMLScriptElement>(`script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`)
+        .forEach((el) => el.remove());
+      calendlyScriptLoadPromise = null;
+      reject(err);
+    };
+
     const existing = document.querySelector<HTMLScriptElement>(
       `script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`,
     );
@@ -50,29 +70,24 @@ export async function loadCalendlyWidgetScript(): Promise<void> {
     if (!existing) {
       scriptToUse.src = CALENDLY_WIDGET_SCRIPT_SRC;
       scriptToUse.async = true;
-      // eslint-disable-next-line no-console
-      console.log("Loading Calendly widget script...");
       document.head.appendChild(scriptToUse);
     }
 
-    scriptToUse.addEventListener(
-      "error",
-      () => reject(new Error("Failed to load Calendly widget script")),
-      { once: true },
-    );
+    scriptToUse.addEventListener("error", () => fail(new Error("Failed to load Calendly widget script")), {
+      once: true,
+    });
 
     const start = Date.now();
-    const interval = window.setInterval(() => {
+    intervalId = window.setInterval(() => {
       if (isCalendlyInitPopupWidgetReady()) {
-        window.clearInterval(interval);
+        if (intervalId !== undefined) window.clearInterval(intervalId);
         markCalendlyReady();
         resolve();
         return;
       }
 
       if (Date.now() - start > INIT_POPUP_WIDGET_TIMEOUT_MS) {
-        window.clearInterval(interval);
-        reject(new Error("Calendly initPopupWidget is not available after script wait."));
+        fail(new Error("Calendly initPopupWidget is not available after script wait."));
       }
     }, INIT_POPUP_WIDGET_POLL_MS);
   });
