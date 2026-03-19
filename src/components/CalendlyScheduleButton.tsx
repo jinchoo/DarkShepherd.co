@@ -71,6 +71,11 @@ export function CalendlyScheduleButton({
     const start = Date.now();
     const pollId = window.setInterval(() => {
       if (Date.now() - start > 15000) {
+        // eslint-disable-next-line no-console
+        console.error("Calendly popup did not open (timeout).", {
+          hasCalendly: Boolean((window as any).Calendly),
+          hasInitPopupWidget: Boolean((window as any).Calendly?.initPopupWidget),
+        });
         window.clearInterval(pollId);
         openingRef.current = false;
         return;
