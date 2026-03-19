@@ -89,7 +89,7 @@ export function CalendlyScheduleButton({
             return;
           }
 
-          if (Date.now() - start > 3000) {
+          if (Date.now() - start > 20000) {
             pendingOpenRef.current = false;
             window.clearInterval(pollId);
             openingRef.current = false;
