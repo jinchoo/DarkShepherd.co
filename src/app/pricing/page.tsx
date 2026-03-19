@@ -94,7 +94,7 @@ export default function PricingPage() {
           </SmoothLink>
         </div>
 
-        <div className="mx-auto mt-8 max-w-2xl text-center md:mt-10">
+        <div className="mx-auto mt-5 max-w-2xl text-center md:mt-7">
           <p className="text-center">
             <span
               className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
@@ -109,28 +109,25 @@ export default function PricingPage() {
               Pricing
             </span>
           </p>
-          <h1 className="mt-4 text-[44px] font-semibold tracking-[-0.03em] md:text-[60px]">
+          <h1 className="mt-4 text-left -translate-x-[6.25rem] text-[44px] font-semibold tracking-[-0.03em] md:text-[60px] whitespace-nowrap">
             <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-              Pricing for your
+              Pricing for your{" "}
             </span>
-            <br />
             <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
               Shopify
-            </span>
-            {" "}
+            </span>{" "}
             <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
               App
-            </span>
+            </span>{" "}
             <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
-              {" "}
               stack
             </span>
           </h1>
-          <p className="mt-5 text-[18px] leading-[1.7] text-white/72">
+          <p className="mt-2 text-[18px] leading-[1.7] text-white/72">
             Every Shopify store is different. Pricing depends on your app stack,
             integrations, and the level of review required.
           </p>
-          <p className="mt-4 text-[18px] leading-[1.7] text-white/72">
+          <p className="mt-1 text-[18px] leading-[1.7] text-white/72">
             We start with a guided security review to understand how apps are currently
             accessing your store data.
           </p>
@@ -177,7 +174,7 @@ export default function PricingPage() {
             needed for your store.
           </p>
 
-          <div className="mt-12 text-center md:mt-16">
+          <div className="mt-3 text-center md:mt-7">
             <CalendlyScheduleButton
               className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 px-8 py-4 text-base font-semibold text-slate-950 shadow-[0_12px_30px_rgba(251,191,36,0.45)] transition hover:brightness-110"
             >
