@@ -1,152 +1,24 @@
-let calendlyScriptLoadPromise: Promise<void> | null = null;
-
-const CALENDLY_WIDGET_SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
-const INIT_POPUP_WIDGET_TIMEOUT_MS = 60000;
-const INIT_POPUP_WIDGET_POLL_MS = 10;
-
-let calendlyReady = false;
-const calendlyReadySubscribers = new Set<() => void>();
-
-function markCalendlyReady(): void {
-  if (calendlyReady) return;
-  calendlyReady = true;
-  calendlyReadySubscribers.forEach((fn) => fn());
-}
-
-export function isCalendlyReady(): boolean {
-  if (calendlyReady) return true;
-  if (isCalendlyInitPopupWidgetReady()) {
-    markCalendlyReady();
-    return true;
-  }
-  return false;
-}
-
-export function subscribeCalendlyReady(listener: () => void): () => void {
-  calendlyReadySubscribers.add(listener);
-  return () => calendlyReadySubscribers.delete(listener);
-}
-
-function isCalendlyInitPopupWidgetReady(): boolean {
-  if (typeof window === "undefined") return false;
-  const calendly = (window as unknown as { Calendly?: { initPopupWidget?: unknown } }).Calendly;
-  return Boolean(calendly?.initPopupWidget && typeof calendly.initPopupWidget === "function");
-}
+// Calendly popup logic intentionally removed.
+// The CTA now opens the booking page via a direct link:
+// https://calendly.com/jin-darkshepherd/30min
 
 export async function loadCalendlyWidgetScript(): Promise<void> {
-  if (typeof document === "undefined") return;
-  if (typeof window !== "undefined" && isCalendlyInitPopupWidgetReady()) {
-    markCalendlyReady();
-    return;
-  }
-
-  // If a previous load failed, the stored promise rejects forever — clear and retry.
-  if (calendlyScriptLoadPromise) {
-    try {
-      await calendlyScriptLoadPromise;
-      return;
-    } catch {
-      calendlyScriptLoadPromise = null;
-    }
-  }
-
-  calendlyScriptLoadPromise = new Promise<void>((resolve, reject) => {
-    // Use a DOM-friendly interval id type. Next.js can compile with different timer libs.
-    let intervalId: number | undefined;
-
-    const fail = (err: Error) => {
-      if (intervalId !== undefined) window.clearInterval(intervalId);
-      // Keep the script tag(s) in place so initPopupWidget might still appear shortly after.
-      calendlyScriptLoadPromise = null;
-      reject(err);
-    };
-
-    const existing = document.querySelector<HTMLScriptElement>(
-      `script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`,
-    );
-
-    const scriptToUse = existing ?? document.createElement("script");
-    if (!existing) {
-      scriptToUse.src = CALENDLY_WIDGET_SCRIPT_SRC;
-      scriptToUse.async = true;
-      document.head.appendChild(scriptToUse);
-    }
-
-    scriptToUse.addEventListener("error", () => fail(new Error("Failed to load Calendly widget script")), {
-      once: true,
-    });
-
-    const start = Date.now();
-    intervalId = window.setInterval(() => {
-      if (isCalendlyInitPopupWidgetReady()) {
-        if (intervalId !== undefined) window.clearInterval(intervalId);
-        markCalendlyReady();
-        resolve();
-        return;
-      }
-
-      if (Date.now() - start > INIT_POPUP_WIDGET_TIMEOUT_MS) {
-        fail(new Error("Calendly initPopupWidget is not available after script wait."));
-      }
-    }, INIT_POPUP_WIDGET_POLL_MS);
-  });
-
-  return calendlyScriptLoadPromise;
+  // no-op (popup removed)
 }
 
-export async function openCalendlyPopup(eventUrl: string): Promise<void> {
-  await loadCalendlyWidgetScript();
-
-  const calendly = (window as unknown as {
-    Calendly?: { initPopupWidget?: (opts: { url: string }) => void };
-  }).Calendly;
-
-  if (!calendly?.initPopupWidget) {
-    // eslint-disable-next-line no-console
-    console.error("Calendly widget not ready:", {
-      hasWindowCalendly: Boolean((window as unknown as { Calendly?: unknown }).Calendly),
-      hasInitPopupWidget: Boolean((calendly as unknown as { initPopupWidget?: unknown })?.initPopupWidget),
-      eventUrl,
-    });
-    throw new Error("Calendly is not available. initPopupWidget is missing after script load.");
-  }
-
-  calendly.initPopupWidget({ url: eventUrl });
+export async function openCalendlyPopup(_eventUrl: string): Promise<void> {
+  // no-op (popup removed)
 }
 
 export function closeCalendlyPopup(): void {
-  const calendly = (window as unknown as {
-    Calendly?: { closePopupWidget?: () => void };
-  }).Calendly;
+  // no-op (popup removed)
+}
 
-  if (typeof calendly?.closePopupWidget === "function") {
-    calendly.closePopupWidget();
-    return;
-  }
+export function isCalendlyReady(): boolean {
+  return false;
+}
 
-  // Fallback: remove known modal/iframe nodes and any other Calendly-injected elements.
-  const selectors = [
-    "#calendly-modal",
-    "#calendly-popup",
-    ".calendly-overlay",
-    ".calendly-popup",
-    ".calendly-modal",
-    '.calendly-widget',
-    'iframe[src*="calendly.com"]',
-    '[id*="calendly"]',
-    '[class*="calendly"]',
-  ];
-
-  for (const sel of selectors) {
-    document.querySelectorAll(sel).forEach((el) => el.remove());
-  }
-
-  // Also remove the most common wrapper if it exists.
-  const calendlyRoot = document.getElementById("calendly-root");
-  if (calendlyRoot) calendlyRoot.remove();
-
-  // Remove any remaining known overlay.
-  const openOverlays = document.querySelectorAll(".calendly-overlay, .calendly-popup, .calendly-modal");
-  openOverlays.forEach((el) => el.remove());
+export function subscribeCalendlyReady(_listener: () => void): () => void {
+  return () => {};
 }
 

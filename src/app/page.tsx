@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { PawScrollButton } from "@/components/PawScrollButton";
 import { CalendlyScheduleButton } from "@/components/CalendlyScheduleButton";
-import { CalendlyScriptLoader } from "@/components/CalendlyScriptLoader";
 
 export default function Home() {
   return (
@@ -89,7 +88,6 @@ export default function Home() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col overflow-visible px-6 pb-16 pt-5 sm:px-8 lg:max-w-7xl lg:px-12">
         <main className="relative mt-0 flex-1 overflow-visible lg:mt-2">
-          <CalendlyScriptLoader />
           {/* Hero section — relative; no bottom padding so button overlays content, no gap to next section */}
           <section className="relative mx-auto w-full max-w-6xl overflow-visible px-4 pt-24 pb-0 md:px-6 lg:max-w-7xl lg:px-8">
           <div className="grid w-full grid-cols-1 items-center gap-10 overflow-visible md:grid-cols-2 lg:grid-cols-[1fr_1.35fr]">

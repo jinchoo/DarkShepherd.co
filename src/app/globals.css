@@ -86,20 +86,5 @@ body {
   }
 }
 
-/* Keep Calendly visible above app content, but avoid aggressive layout overrides. */
-.calendly-overlay,
-.calendly-modal,
-.calendly-popup {
-  z-index: 999999 !important;
-}
-
-/* Make the embedded widget slightly inset so "Time" isn't flush */
-.calendly-popup iframe[src*="calendly.com"],
-#calendly-modal iframe[src*="calendly.com"],
-.calendly-modal iframe[src*="calendly.com"] {
-  width: calc(100vw - 56px) !important;
-  height: calc(100vh - 56px) !important;
-  max-height: calc(100vh - 56px) !important;
-  border: 0 !important;
-}
+/* (Calendly popup removed) */
 

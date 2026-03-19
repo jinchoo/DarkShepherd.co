@@ -2,7 +2,6 @@ import Link from "next/link";
 import { PawScrollButton } from "@/components/PawScrollButton";
 import { SmoothLink } from "@/components/SmoothLink";
 import { CalendlyScheduleButton } from "@/components/CalendlyScheduleButton";
-import { CalendlyScriptLoader } from "@/components/CalendlyScriptLoader";
 
 export default function PricingPage() {
   return (
@@ -86,7 +85,6 @@ export default function PricingPage() {
       </header>
 
       <main className="relative z-10 mx-auto flex max-w-5xl flex-col px-6 pb-24 pt-20 sm:px-8 lg:px-0">
-        <CalendlyScriptLoader />
         <div className="mx-auto -mt-10 mb-6 flex w-full max-w-2xl justify-center">
           <SmoothLink
             href="/how-it-works"
