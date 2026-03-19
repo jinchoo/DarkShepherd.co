@@ -86,10 +86,10 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col overflow-visible px-6 pt-5 sm:px-8 lg:max-w-7xl lg:px-12">
+      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col overflow-visible px-6 pt-3 sm:px-8 lg:max-w-7xl lg:px-12">
         <main className="relative mt-0 flex-1 overflow-visible lg:mt-0">
           {/* Hero section — relative; no bottom padding so button overlays content, no gap to next section */}
-          <section className="relative mx-auto w-full max-w-6xl overflow-hidden px-4 pt-20 pb-0 md:px-6 lg:max-w-7xl lg:px-8">
+          <section className="relative mx-auto w-full max-w-6xl overflow-hidden px-4 pt-[72px] pb-0 md:px-6 lg:max-w-7xl lg:px-8">
           <div className="grid w-full grid-cols-1 items-center gap-8 md:grid-cols-2 lg:grid-cols-[1fr_1.35fr]">
             <div className="relative z-10 max-w-2xl shrink-0 space-y-10">
               <div className="space-y-10">
