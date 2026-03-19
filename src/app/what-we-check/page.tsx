@@ -83,8 +83,8 @@ export default function WhatWeCheckPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto max-w-[1380px] px-8 pb-24 pt-12 md:px-12">
-        <div className="mx-auto mb-8 flex max-w-[760px] justify-center">
+      <section className="relative z-10 mx-auto max-w-[1380px] px-8 pb-24 pt-10 md:px-12 md:pt-12">
+        <div className="mx-auto mb-6 flex max-w-[760px] justify-center">
           <SmoothLink
             href="/why-it-matters"
             className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
