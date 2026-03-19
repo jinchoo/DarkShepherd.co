@@ -21,7 +21,7 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       : position === "lower"
       ? "-bottom-32"
       : position === "higher"
-      ? "-bottom-2"
+      ? "-bottom-4"
       : "-bottom-16";
 
   function handleClick(e: React.MouseEvent) {
