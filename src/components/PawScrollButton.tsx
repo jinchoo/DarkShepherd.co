@@ -114,7 +114,7 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       className={[
         "paw-pulse absolute",
         bottomClass,
-        "left-1/2 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border-2 border-amber-400/50 bg-amber-400/10 transition hover:border-amber-400 hover:bg-amber-400/20",
+        "left-1/2 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
         // smooth show/hide
         "transform-gpu transition-all duration-300 ease-out",
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none",
