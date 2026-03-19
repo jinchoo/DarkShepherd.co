@@ -94,7 +94,7 @@ export default function PricingPage() {
           </SmoothLink>
         </div>
 
-        <div className="mx-auto mt-5 max-w-2xl text-center md:mt-7">
+        <div className="mx-auto mt-2 max-w-2xl text-center md:mt-4">
           <p className="text-center">
             <span
               className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
@@ -109,7 +109,7 @@ export default function PricingPage() {
               Pricing
             </span>
           </p>
-          <h1 className="mt-4 text-left -translate-x-[6.25rem] text-[44px] font-semibold tracking-[-0.03em] md:text-[60px] whitespace-nowrap">
+          <h1 className="mt-1 text-left -translate-x-[6.25rem] text-[44px] font-semibold tracking-[-0.03em] md:text-[60px] whitespace-nowrap">
             <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
               Pricing for your{" "}
             </span>
@@ -123,11 +123,11 @@ export default function PricingPage() {
               stack
             </span>
           </h1>
-          <p className="mt-5 text-[18px] leading-[1.7] text-white/72">
+          <p className="mt-2 text-[18px] leading-[1.7] text-white/72">
             Every Shopify store is different. Pricing depends on your app stack,
             integrations, and the level of review required.
           </p>
-          <p className="mt-1 text-[18px] leading-[1.7] text-white/72">
+          <p className="mt-0 text-[18px] leading-[1.7] text-white/72">
             We start with a guided security review to understand how apps are currently
             accessing your store data.
           </p>
