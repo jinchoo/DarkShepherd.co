@@ -64,23 +64,25 @@ export function CalendlyScheduleButton({
       return;
     }
 
-    loadCalendlyWidgetScript()
-      .then(() => {
-        const opened = openCalendlyNow();
-        // eslint-disable-next-line no-console
-        console.log("Calendly popup init after script load:", opened);
-        if (!opened) {
-          window.open(CALENDLY_EVENT_URL, "_blank", "noopener,noreferrer");
-        }
-      })
-      .catch(() => {
-        // eslint-disable-next-line no-console
-        console.error("Calendly widget script failed; opening fallback URL");
-        window.open(CALENDLY_EVENT_URL, "_blank", "noopener,noreferrer");
-      })
-      .finally(() => {
+    // Warm up (inject script if needed), but avoid async window.open fallbacks
+    // which can be blocked by pop-up blockers.
+    warmCalendlyOnce();
+
+    const start = Date.now();
+    const pollId = window.setInterval(() => {
+      if (Date.now() - start > 15000) {
+        window.clearInterval(pollId);
         openingRef.current = false;
-      });
+        return;
+      }
+
+      if (openCalendlyNow()) {
+        // eslint-disable-next-line no-console
+        console.log("Calendly popup init opened after polling");
+        window.clearInterval(pollId);
+        openingRef.current = false;
+      }
+    }, 100);
   }
 
   React.useEffect(() => {
