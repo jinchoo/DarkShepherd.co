@@ -51,7 +51,8 @@ export async function loadCalendlyWidgetScript(): Promise<void> {
   }
 
   calendlyScriptLoadPromise = new Promise<void>((resolve, reject) => {
-    let intervalId: ReturnType<typeof window.setInterval> | undefined;
+    // Use a DOM-friendly interval id type. Next.js can compile with different timer libs.
+    let intervalId: number | undefined;
 
     const fail = (err: Error) => {
       if (intervalId !== undefined) window.clearInterval(intervalId);
