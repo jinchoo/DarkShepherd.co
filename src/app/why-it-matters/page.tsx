@@ -94,7 +94,7 @@ export default function WhyItMattersPage() {
           </SmoothLink>
         </div>
 
-        <div className="mx-auto max-w-2xl text-center mt-20">
+        <div className="mx-auto max-w-2xl text-center mt-16">
           <p className="text-center">
             <span
               className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
@@ -109,17 +109,17 @@ export default function WhyItMattersPage() {
               Why It Matters
             </span>
           </p>
-          <p className="mt-8 text-[22px] leading-[1.7] text-white/72">
+          <p className="mt-6 text-[22px] leading-[1.7] text-white/72">
             Most Shopify stores rely on multiple third-party apps to run marketing,
             subscriptions, analytics, and operations.
           </p>
-          <p className="mt-3 text-[22px] leading-[1.7] text-white/72">
+          <p className="mt-2 text-[22px] leading-[1.7] text-white/72">
             Over time, many of these apps continue to retain access to your store’s data —
             even when they’re no longer actively used.
           </p>
         </div>
 
-        <section className="mx-auto mt-6 w-full max-w-[700px]">
+        <section className="mx-auto mt-4 w-full max-w-[700px]">
           <ul className="mx-auto space-y-2 text-[20px] leading-[1.8] text-white/80 text-left max-w-[640px]">
             <li className="flex items-start gap-3 pl-0">
               <span className="mt-1 inline-flex h-4 w-4 items-center justify-center text-[14px] bg-gradient-to-tr from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
