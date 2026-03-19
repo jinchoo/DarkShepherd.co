@@ -23,7 +23,7 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       : position === "lower"
       ? "bottom-6"
       : position === "higher"
-      ? "bottom-8"
+      ? "bottom-[10px]"
       : "bottom-6";
 
   function handleClick(e: React.MouseEvent) {
@@ -68,7 +68,8 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       // since it spans the lower viewport and can hide the paw entirely on the landing page.
 
       // Hide if the button would be too close to the bottom edge.
-      if (btnRect.bottom > innerH - 12) {
+      // We allow it to sit close to the bottom (8-12px) without being clipped.
+      if (btnRect.bottom > innerH - 8) {
         setVisible(false);
         return;
       }
