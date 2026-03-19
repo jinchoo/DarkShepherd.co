@@ -71,7 +71,7 @@ export function CalendlyScheduleButton({
 
     const start = Date.now();
     const pollId = window.setInterval(() => {
-      if (Date.now() - start > 15000) {
+      if (Date.now() - start > 60000) {
         // eslint-disable-next-line no-console
         const hasScript = Boolean(document.querySelector(`script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`));
         const scriptCount = document.querySelectorAll(`script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`).length;

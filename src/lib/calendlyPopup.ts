@@ -1,7 +1,7 @@
 let calendlyScriptLoadPromise: Promise<void> | null = null;
 
 const CALENDLY_WIDGET_SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
-const INIT_POPUP_WIDGET_TIMEOUT_MS = 20000;
+const INIT_POPUP_WIDGET_TIMEOUT_MS = 60000;
 const INIT_POPUP_WIDGET_POLL_MS = 10;
 
 let calendlyReady = false;
@@ -56,9 +56,7 @@ export async function loadCalendlyWidgetScript(): Promise<void> {
 
     const fail = (err: Error) => {
       if (intervalId !== undefined) window.clearInterval(intervalId);
-      document
-        .querySelectorAll<HTMLScriptElement>(`script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`)
-        .forEach((el) => el.remove());
+      // Keep the script tag(s) in place so initPopupWidget might still appear shortly after.
       calendlyScriptLoadPromise = null;
       reject(err);
     };
