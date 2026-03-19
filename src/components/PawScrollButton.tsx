@@ -62,9 +62,8 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       // Prevent overlap with important UI (Calendly CTA link + hero shield image).
       const criticalEls: Element[] = [];
       criticalEls.push(...Array.from(document.querySelectorAll('a[href="https://calendly.com/jin-darkshepherd/30min"]')));
-
-      const shieldImg = document.querySelector('img[alt="DarkShepherd Security Shield"]');
-      if (shieldImg) criticalEls.push(shieldImg);
+      // Note: we intentionally do NOT block visibility based on the hero shield image,
+      // since it spans the lower viewport and can hide the paw entirely on the landing page.
 
       // Hide if the button would be too close to the bottom edge.
       if (btnRect.bottom > innerH - 12) {
