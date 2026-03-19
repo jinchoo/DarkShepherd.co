@@ -92,7 +92,7 @@ export default function HowItWorksPage() {
             ↑ Back to What We Check
           </SmoothLink>
         </div>
-        <div className="mx-auto mt-8 max-w-[760px] text-center md:mt-16">
+        <div className="mx-auto mt-6 max-w-[760px] text-center md:mt-14">
           <p className="text-center">
             <span
               className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
@@ -123,7 +123,7 @@ export default function HowItWorksPage() {
             </span>
             <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent"> access</span>
           </h1>
-          <p className="mt-3 text-[18px] leading-[1.7] text-white/72">
+          <p className="mt-2 text-[18px] leading-[1.7] text-white/72">
             DarkShepherd helps you see which third-party apps can access store, customer,
             and order data—so you can reduce risk without disrupting your{"\u00A0"}operations.
           </p>
