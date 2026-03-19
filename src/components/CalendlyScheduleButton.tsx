@@ -22,6 +22,8 @@ export function CalendlyScheduleButton({
     if (warmedRef.current) return;
     warmedRef.current = true;
     loadCalendlyWidgetScript().catch(() => {
+      // eslint-disable-next-line no-console
+      console.error("Calendly warm-up failed");
       warmedRef.current = false;
     });
   }
@@ -52,18 +54,28 @@ export function CalendlyScheduleButton({
     if (openingRef.current) return;
     openingRef.current = true;
 
+    // eslint-disable-next-line no-console
+    console.log("Calendly CTA clicked");
+
     if (openCalendlyNow()) {
+      // eslint-disable-next-line no-console
+      console.log("Calendly popup init called immediately");
       openingRef.current = false;
       return;
     }
 
     loadCalendlyWidgetScript()
       .then(() => {
-        if (!openCalendlyNow()) {
+        const opened = openCalendlyNow();
+        // eslint-disable-next-line no-console
+        console.log("Calendly popup init after script load:", opened);
+        if (!opened) {
           window.open(CALENDLY_EVENT_URL, "_blank", "noopener,noreferrer");
         }
       })
       .catch(() => {
+        // eslint-disable-next-line no-console
+        console.error("Calendly widget script failed; opening fallback URL");
         window.open(CALENDLY_EVENT_URL, "_blank", "noopener,noreferrer");
       })
       .finally(() => {
