@@ -5,15 +5,15 @@ import { CalendlyScheduleButton } from "@/components/CalendlyScheduleButton";
 
 export default function Home() {
   return (
-    <div id="top" className="font-display relative min-h-screen overflow-visible bg-[#050816] text-slate-100">
+    <div id="top" className="font-display relative h-[100dvh] overflow-hidden bg-[#050816] text-slate-100">
       {/* full background image — visible layer */}
       <div
-        className="pointer-events-none fixed inset-0 z-0 min-h-screen min-w-full bg-cover bg-center bg-no-repeat"
+        className="pointer-events-none fixed inset-0 z-0 h-full min-w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url(/darkshepherd-background.png)" }}
       />
       {/* full-page dark navy radial overlay over galaxy background */}
       <div
-        className="pointer-events-none fixed inset-0 z-[1] min-h-screen min-w-full"
+        className="pointer-events-none fixed inset-0 z-[1] h-full min-w-full"
         style={{
           background:
             "radial-gradient(circle at left center, rgba(5,8,22,0.96) 0%, rgba(5,8,22,0.9) 40%, rgba(5,8,22,0.8) 70%, rgba(5,8,22,0.75) 100%)",
@@ -86,12 +86,12 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col overflow-visible px-6 pb-16 pt-5 sm:px-8 lg:max-w-7xl lg:px-12">
-        <main className="relative mt-0 flex-1 overflow-visible lg:mt-2">
+      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col overflow-visible px-6 pt-5 sm:px-8 lg:max-w-7xl lg:px-12">
+        <main className="relative mt-0 flex-1 overflow-visible lg:mt-0">
           {/* Hero section — relative; no bottom padding so button overlays content, no gap to next section */}
-          <section className="relative mx-auto w-full max-w-6xl overflow-visible px-4 pt-24 pb-0 md:px-6 lg:max-w-7xl lg:px-8">
-          <div className="grid w-full grid-cols-1 items-center gap-10 overflow-visible md:grid-cols-2 lg:grid-cols-[1fr_1.35fr]">
-            <div className="relative z-10 max-w-2xl shrink-0 space-y-12">
+          <section className="relative mx-auto w-full max-w-6xl overflow-hidden px-4 pt-20 pb-0 md:px-6 lg:max-w-7xl lg:px-8">
+          <div className="grid w-full grid-cols-1 items-center gap-8 md:grid-cols-2 lg:grid-cols-[1fr_1.35fr]">
+            <div className="relative z-10 max-w-2xl shrink-0 space-y-10">
               <div className="space-y-10">
                 <p className="text-sm font-semibold uppercase tracking-[0.35em] bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                   Shopify App Security
