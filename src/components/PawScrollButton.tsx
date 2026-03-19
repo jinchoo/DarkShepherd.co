@@ -47,22 +47,9 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       const btn = buttonRef.current;
       if (!btn) return;
 
-      const scrollTop = window.scrollY || 0;
       const innerH = window.innerHeight || 0;
       const doc = document.documentElement;
       const scrollable = doc.scrollHeight - innerH;
-
-      // If there's no meaningful scroll (or the page is ~one viewport tall), don't show.
-      if (scrollable <= 50 || scrollable / Math.max(innerH, 1) < 0.15) {
-        setVisible(false);
-        return;
-      }
-
-      // Hide at the top; show only after user scrolls down.
-      if (scrollTop < 80) {
-        setVisible(false);
-        return;
-      }
 
       const btnRect = btn.getBoundingClientRect();
 
@@ -128,20 +115,14 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       className={[
         "paw-pulse absolute",
         bottomClass,
-        // desktop: bottom-center; mobile: bottom-right
-        "left-auto right-4 translate-x-0",
-        "sm:left-1/2 sm:right-auto sm:-translate-x-1/2",
-        "z-20 flex items-center justify-center rounded-full border-2 border-amber-400/50 bg-amber-400/10",
-        // keep current size on desktop, smaller on mobile
-        "h-11 w-11 sm:h-14 sm:w-14",
-        "transition hover:border-amber-400 hover:bg-amber-400/20",
+        "left-1/2 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border-2 border-amber-400/50 bg-amber-400/10 transition hover:border-amber-400 hover:bg-amber-400/20",
         // smooth show/hide
         "transform-gpu transition-all duration-300 ease-out",
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none",
       ].join(" ")}
       aria-label={ariaLabel}
     >
-      <svg viewBox="0 0 225 225" className="h-7 w-7 shrink-0 sm:h-9 sm:w-9" aria-hidden>
+      <svg viewBox="0 0 225 225" className="h-9 w-9 shrink-0" aria-hidden>
         <defs>
           <linearGradient id="paw-gold" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#FFD36A" />
