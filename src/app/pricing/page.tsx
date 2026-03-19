@@ -123,7 +123,7 @@ export default function PricingPage() {
               stack
             </span>
           </h1>
-          <p className="mt-2 text-[18px] leading-[1.7] text-white/72">
+          <p className="mt-5 text-[18px] leading-[1.7] text-white/72">
             Every Shopify store is different. Pricing depends on your app stack,
             integrations, and the level of review required.
           </p>
