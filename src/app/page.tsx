@@ -148,7 +148,7 @@ export default function Home() {
             </div>
 
             {/* right side — hero shield (cropped asset + zoom in fixed wrapper) */}
-            <div className="relative mt-8 flex min-w-0 flex-1 items-center justify-center overflow-visible lg:mt-0">
+          <div className="relative mt-8 flex min-w-0 flex-1 items-center justify-center overflow-visible lg:mt-0">
               <div className="relative flex items-center justify-center lg:justify-end w-full min-h-[540px] overflow-visible">
                 <div className="relative w-[520px] h-[520px] lg:w-[600px] lg:h-[600px] -translate-y-28 translate-x-8 lg:translate-x-14 overflow-visible">
                   <div className="absolute inset-4 rounded-full bg-amber-400/5 blur-[70px]" aria-hidden />
@@ -164,7 +164,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <PawScrollButton href="/why-it-matters" ariaLabel="Go to Why It Matters" position="higher" />
+          <PawScrollButton
+            href="/why-it-matters"
+            ariaLabel="Go to Why It Matters"
+            position="higher"
+          />
           </section>
 
         </main>

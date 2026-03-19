@@ -17,13 +17,12 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
 
   const bottomClass =
     // Use positive offsets so the paw is fully visible even when parents clip overflow.
-    // 24px = bottom-6, 32px = bottom-8
     position === "lowest"
       ? "bottom-8"
       : position === "lower"
       ? "bottom-6"
       : position === "higher"
-      ? "bottom-[10px]"
+      ? "bottom-[12px]"
       : "bottom-6";
 
   function handleClick(e: React.MouseEvent) {
@@ -58,6 +57,12 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       // Hide if it's outside the viewport (so it never feels cramped).
       if (btnRect.bottom <= 0 || btnRect.top >= innerH) {
         setVisible(false);
+        return;
+      }
+
+      // Home page: force visibility so it never disappears on the hero.
+      if (href === "/why-it-matters" && position === "higher") {
+        setVisible(true);
         return;
       }
 
@@ -117,7 +122,7 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
       className={[
         "paw-pulse absolute",
         bottomClass,
-        "left-1/2 z-[999] flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
+        "left-1/2 z-50 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
         // smooth show/hide
         "transform-gpu transition-all duration-300 ease-out",
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none",
