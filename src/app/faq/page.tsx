@@ -145,18 +145,18 @@ export default function FAQPage() {
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto flex max-w-5xl flex-col px-6 pb-24 pt-20 sm:px-8 lg:px-0">
-        <div className="mx-auto mb-4 flex w-full max-w-2xl justify-center text-sm text-slate-300/85">
+      <main className="relative z-10 mx-auto flex max-w-5xl flex-col px-6 pb-24 pt-12 sm:px-8 lg:px-0">
+        <div className="mx-auto mb-8 flex w-full max-w-2xl justify-center text-sm text-slate-300/85">
           <SmoothLink
             href="/pricing"
-            className="inline-flex items-center gap-2 text-[14px] font-medium text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
           >
             <span className="text-[16px]">↑</span>
             <span>Back to Pricing</span>
           </SmoothLink>
         </div>
 
-        <div className="mx-auto max-w-2xl text-center mt-20">
+        <div className="mx-auto max-w-2xl text-center mt-7">
           <p className="text-center">
             <span
               className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
@@ -173,7 +173,7 @@ export default function FAQPage() {
           </p>
         </div>
 
-        <section className="mx-auto mt-10 w-full max-w-3xl space-y-4">
+        <section className="mx-auto mt-8 w-full max-w-3xl space-y-4">
           {faqs.map((item) => (
             <details
               key={item.question}
