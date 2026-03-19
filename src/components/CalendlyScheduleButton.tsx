@@ -9,6 +9,7 @@ type CalendlyScheduleButtonProps = {
 };
 
 const CALENDLY_EVENT_URL = "https://calendly.com/jin-darkshepherd/30min";
+const CALENDLY_WIDGET_SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
 
 export function CalendlyScheduleButton({
   className,
@@ -72,10 +73,13 @@ export function CalendlyScheduleButton({
     const pollId = window.setInterval(() => {
       if (Date.now() - start > 15000) {
         // eslint-disable-next-line no-console
-        console.error("Calendly popup did not open (timeout).", {
-          hasCalendly: Boolean((window as any).Calendly),
-          hasInitPopupWidget: Boolean((window as any).Calendly?.initPopupWidget),
-        });
+        const hasScript = Boolean(document.querySelector(`script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`));
+        const scriptCount = document.querySelectorAll(`script[src="${CALENDLY_WIDGET_SCRIPT_SRC}"]`).length;
+        const hasCalendly = Boolean((window as any).Calendly);
+        const hasInitPopupWidget = Boolean((window as any).Calendly?.initPopupWidget);
+        console.error(
+          `Calendly popup did not open (timeout). hasScript=${hasScript} scriptCount=${scriptCount} hasCalendly=${hasCalendly} hasInitPopupWidget=${hasInitPopupWidget}`,
+        );
         window.clearInterval(pollId);
         openingRef.current = false;
         return;
