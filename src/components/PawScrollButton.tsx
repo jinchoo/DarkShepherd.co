@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React from "react";
 
 type PawScrollButtonProps = {
   href?: string;
@@ -12,8 +11,6 @@ type PawScrollButtonProps = {
 
 export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How it Works", position = "default" }: PawScrollButtonProps) {
   const router = useRouter();
-  const buttonRef = React.useRef<HTMLAnchorElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
 
   const bottomClass =
     // Use positive offsets so the paw is fully visible even when parents clip overflow.
@@ -35,97 +32,14 @@ export function PawScrollButton({ href = "/how-it-works", ariaLabel = "Go to How
     }
   }
 
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    let rafId: number | null = null;
-
-    function rectsOverlap(a: DOMRect, b: DOMRect): boolean {
-      return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
-    }
-
-    function computeVisibility() {
-      const btn = buttonRef.current;
-      if (!btn) return;
-
-      const innerH = window.innerHeight || 0;
-      const doc = document.documentElement;
-      const scrollable = doc.scrollHeight - innerH;
-
-      const btnRect = btn.getBoundingClientRect();
-
-      // Hide if it's outside the viewport (so it never feels cramped).
-      if (btnRect.bottom <= 0 || btnRect.top >= innerH) {
-        setVisible(false);
-        return;
-      }
-
-      // Home page: force visibility so it never disappears on the hero.
-      if (href === "/why-it-matters" && position === "higher") {
-        setVisible(true);
-        return;
-      }
-
-      // Prevent overlap with important UI (Calendly CTA link + hero shield image).
-      const criticalEls: Element[] = [];
-      criticalEls.push(...Array.from(document.querySelectorAll('a[href="https://calendly.com/jin-darkshepherd/30min"]')));
-      // Note: we intentionally do NOT block visibility based on the hero shield image,
-      // since it spans the lower viewport and can hide the paw entirely on the landing page.
-
-      // Hide if the button would be too close to the bottom edge.
-      // We allow it to sit close to the bottom (8-12px) without being clipped.
-      if (btnRect.bottom > innerH - 8) {
-        setVisible(false);
-        return;
-      }
-
-      for (const el of criticalEls) {
-        const r = el.getBoundingClientRect();
-        if (r.width > 0 && r.height > 0 && rectsOverlap(btnRect, r)) {
-          setVisible(false);
-          return;
-        }
-      }
-
-      setVisible(true);
-    }
-
-    const onScroll = () => {
-      if (rafId !== null) return;
-      rafId = window.requestAnimationFrame(() => {
-        rafId = null;
-        computeVisibility();
-      });
-    };
-
-    const onResize = () => {
-      computeVisibility();
-    };
-
-    // Initial compute after mount.
-    computeVisibility();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      if (rafId !== null) window.cancelAnimationFrame(rafId);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
-
   return (
     <a
-      ref={buttonRef}
       href={href}
       onClick={handleClick}
       className={[
         "paw-pulse absolute",
         bottomClass,
         "left-1/2 z-50 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
-        // smooth show/hide
-        "transform-gpu transition-all duration-300 ease-out",
-        visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none",
       ].join(" ")}
       aria-label={ariaLabel}
     >
