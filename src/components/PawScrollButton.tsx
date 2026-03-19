@@ -10,17 +10,21 @@ type PawScrollButtonProps = {
   position?: "default" | "lower" | "higher" | "lowest";
   /** Use fixed positioning when you want it pinned to the viewport (e.g. home hero). */
   mode?: "absolute" | "fixed";
+  /** Optional Tailwind class override for the bottom offset. */
+  bottomOverrideClassName?: string;
 };
 
 export function PawScrollButton({
   href = "/how-it-works",
   ariaLabel = "Go to How it Works",
-  position = "default",
-  mode = "absolute",
+  position = "higher",
+  mode = "fixed",
+  bottomOverrideClassName,
 }: PawScrollButtonProps) {
   const router = useRouter();
 
   const bottomClass =
+    bottomOverrideClassName ??
     // Use positive offsets so the paw is fully visible even when parents clip overflow.
     position === "lowest"
       ? "bottom-8"

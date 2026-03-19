@@ -156,6 +156,7 @@ export default function WhyItMattersPage() {
           href="/what-we-check"
           ariaLabel="Go to What We Check"
           position="higher"
+          mode="fixed"
         />
       </main>
     </div>
