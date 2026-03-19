@@ -164,7 +164,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <PawScrollButton href="/why-it-matters" ariaLabel="Go to Why It Matters" position="lower" />
+          <PawScrollButton href="/why-it-matters" ariaLabel="Go to Why It Matters" position="default" />
           </section>
 
         </main>
