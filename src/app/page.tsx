@@ -168,6 +168,7 @@ export default function Home() {
             href="/why-it-matters"
             ariaLabel="Go to Why It Matters"
             position="higher"
+            mode="fixed"
           />
           </section>
 
