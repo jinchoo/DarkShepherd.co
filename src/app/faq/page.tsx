@@ -1,6 +1,13 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { SmoothLink } from "@/components/SmoothLink";
+import {
+  InternalBackLinkRow,
+  InternalPageShell,
+} from "@/components/layout/InternalPageShell";
+import { SiteBackground } from "@/components/layout/SiteBackground";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteMain } from "@/components/layout/SiteMain";
+import { marketingEyebrowStyle } from "@/lib/marketing-styles";
 
 type FAQItem = {
   question: string;
@@ -50,151 +57,78 @@ const faqs: FAQItem[] = [
   },
   {
     question: "How can I contact DarkShepherd?",
-    answer:
+    answer: (
       <>
         You can reach us at{" "}
         <a
           href="mailto:jin@darkshepherd.co"
-          className="no-underline bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent font-semibold transition-colors hover:brightness-110"
+          className="font-semibold no-underline bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent transition-colors hover:brightness-110"
         >
           jin@darkshepherd.co
         </a>{" "}
         or schedule a review directly through the site.
-      </>,
+      </>
+    ),
   },
 ];
 
 export default function FAQPage() {
   return (
-    <div className="font-display relative min-h-screen overflow-visible bg-[#050816] text-slate-100">
-      <div
-        className="pointer-events-none fixed inset-0 z-0 min-h-screen min-w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url(/darkshepherd-background.png)" }}
-      />
-      <div
-        className="pointer-events-none fixed inset-0 z-[1] min-h-screen min-w-full"
-        style={{
-          background:
-            "radial-gradient(circle at left center, rgba(5,8,22,0.96) 0%, rgba(5,8,22,0.9) 40%, rgba(5,8,22,0.8) 70%, rgba(5,8,22,0.75) 100%)",
-        }}
-        aria-hidden
-      />
-
-      <header className="sticky top-2 z-50 h-[72px] w-full bg-transparent">
-        <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6 sm:px-8 lg:max-w-7xl lg:px-12">
-          <Link href="/" className="flex items-center">
-            <div className="flex items-center gap-2">
-              <img
-                src="/images/darkshepherd-shield.png"
-                alt="DarkShepherd"
-                className="-mt-4 h-[68px] w-auto object-contain drop-shadow-[0_0_12px_rgba(251,191,36,0.6)]"
-              />
-              <span
-                className="font-display text-[20px] bg-clip-text text-transparent"
-                style={{
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  background: "linear-gradient(90deg, #FFC857, #FFB200, #FFD36A)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                DarkShepherd
-              </span>
-            </div>
-          </Link>
-
-          <nav className="font-display hidden items-center gap-8 text-base font-semibold text-slate-200/80 md:flex">
-            <Link
-              href="/why-it-matters"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              Why It Matters
-            </Link>
-            <Link
-              href="/what-we-check"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              What We Check
-            </Link>
-            <Link
-              href="/how-it-works"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              How it Works
-            </Link>
-            <Link
+    <div className="font-display relative min-h-screen bg-[#050816] text-slate-100">
+      <SiteBackground />
+      <SiteHeader />
+      <SiteMain internal>
+        <InternalPageShell variant="medium">
+          <InternalBackLinkRow>
+            <SmoothLink
               href="/pricing"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
             >
-              Pricing
-            </Link>
-            <Link
-              href="/faq"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              FAQ
-            </Link>
-            <div className="rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 p-[2px]">
-              <button className="font-display w-full rounded-full bg-[#050816] px-5 py-2 text-sm font-semibold uppercase tracking-wide text-amber-100/90 transition hover:bg-[#0a0f1a] hover:text-amber-50">
-                Login
-              </button>
-            </div>
-          </nav>
-        </div>
-      </header>
+              <span aria-hidden className="text-base">
+                ↑
+              </span>
+              <span>Back to Pricing</span>
+            </SmoothLink>
+          </InternalBackLinkRow>
 
-      <main className="relative z-10 mx-auto flex max-w-5xl flex-col px-6 pb-24 pt-12 sm:px-8 lg:px-0">
-        <div className="mx-auto mb-8 flex w-full max-w-2xl justify-center text-sm text-slate-300/85">
-          <SmoothLink
-            href="/pricing"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-          >
-            <span className="text-[16px]">↑</span>
-            <span>Back to Pricing</span>
-          </SmoothLink>
-        </div>
-
-        <div className="mx-auto max-w-2xl text-center mt-7">
-          <p className="text-center">
-            <span
-              className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
-              style={{
-                background: "linear-gradient(90deg, #FFD36A, #FFB200, #FFD36A)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              Frequently Asked Questions
-            </span>
-          </p>
-        </div>
-
-        <section className="mx-auto mt-8 w-full max-w-3xl space-y-4">
-          {faqs.map((item) => (
-            <details
-              key={item.question}
-              className="group rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-4 text-left backdrop-blur-sm"
-            >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[17px] font-semibold">
-                <span className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent">
-                  {item.question}
+          <div className="flex w-full flex-col gap-10 md:gap-12 lg:gap-14">
+            <div className="text-center">
+              <p>
+                <span
+                  className="inline-block text-balance text-xl font-semibold uppercase tracking-[0.18em] sm:text-2xl md:text-3xl md:tracking-[0.24em]"
+                  style={marketingEyebrowStyle}
+                >
+                  Frequently Asked Questions
                 </span>
-                <span className="text-amber-300 transition group-open:rotate-180">
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 text-[16px] leading-relaxed text-white/75">
-                {item.answer}
               </p>
-            </details>
-          ))}
-        </section>
-      </main>
+            </div>
+
+            <div className="flex w-full flex-col gap-3 sm:gap-4">
+              {faqs.map((item) => (
+                <details
+                  key={item.question}
+                  className="group rounded-2xl border border-white/12 bg-white/[0.03] px-4 py-3 text-left backdrop-blur-sm sm:px-6 sm:py-4 md:px-7"
+                >
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-3 text-base font-semibold sm:text-[17px] [&::-webkit-details-marker]:hidden">
+                    <span className="min-w-0 flex-1 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent">
+                      {item.question}
+                    </span>
+                    <span
+                      className="shrink-0 text-amber-300 transition group-open:rotate-180"
+                      aria-hidden
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <div className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">
+                    {item.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </InternalPageShell>
+      </SiteMain>
     </div>
   );
 }
-

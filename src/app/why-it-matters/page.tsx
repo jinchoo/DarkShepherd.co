@@ -1,156 +1,99 @@
 import { PawScrollButton } from "@/components/PawScrollButton";
 import { SmoothLink } from "@/components/SmoothLink";
-import Link from "next/link";
+import {
+  InternalBackLinkRow,
+  InternalPageShell,
+} from "@/components/layout/InternalPageShell";
+import { SiteBackground } from "@/components/layout/SiteBackground";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteMain } from "@/components/layout/SiteMain";
+import { marketingEyebrowStyle } from "@/lib/marketing-styles";
 
 export default function WhyItMattersPage() {
   return (
-    <div className="font-display relative min-h-screen overflow-visible bg-[#050816] text-slate-100">
-      <div
-        className="pointer-events-none fixed inset-0 z-0 min-h-screen min-w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url(/darkshepherd-background.png)" }}
-      />
-      <div
-        className="pointer-events-none fixed inset-0 z-[1] min-h-screen min-w-full"
-        style={{
-          background:
-            "radial-gradient(circle at left center, rgba(5,8,22,0.96) 0%, rgba(5,8,22,0.9) 40%, rgba(5,8,22,0.8) 70%, rgba(5,8,22,0.75) 100%)",
-        }}
-        aria-hidden
-      />
-
-      <header className="sticky top-2 z-50 h-[72px] w-full bg-transparent">
-        <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6 sm:px-8 lg:max-w-7xl lg:px-12">
-          <Link href="/" className="flex items-center">
-            <div className="flex items-center gap-2">
-              <img
-                src="/images/darkshepherd-shield.png"
-                alt="DarkShepherd"
-                className="-mt-4 h-[68px] w-auto object-contain drop-shadow-[0_0_12px_rgba(251,191,36,0.6)]"
-              />
-              <span
-                className="font-display text-[20px] bg-clip-text text-transparent"
-                style={{
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  background: "linear-gradient(90deg, #FFC857, #FFB200, #FFD36A)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                DarkShepherd
+    <div className="font-display relative min-h-screen bg-[#050816] text-slate-100">
+      <SiteBackground />
+      <SiteHeader />
+      <SiteMain internal>
+        <InternalPageShell variant="narrow">
+          <InternalBackLinkRow>
+            <SmoothLink
+              href="/"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
+            >
+              <span aria-hidden className="text-base">
+                ↑
               </span>
+              <span>Back to Home</span>
+            </SmoothLink>
+          </InternalBackLinkRow>
+
+          <div className="flex w-full flex-col gap-12 sm:gap-14 lg:gap-16">
+            <div className="flex w-full flex-col items-center gap-6 text-center sm:gap-8">
+              <p>
+                <span
+                  className="inline-block text-xl font-semibold uppercase tracking-[0.22em] sm:text-2xl md:text-3xl md:tracking-[0.28em]"
+                  style={marketingEyebrowStyle}
+                >
+                  Why It Matters
+                </span>
+              </p>
+              <div className="mx-auto flex w-full max-w-prose flex-col gap-4 text-lg leading-relaxed text-white/72 sm:gap-5 sm:text-xl sm:leading-[1.7]">
+                <p>
+                  Most Shopify stores rely on multiple third-party apps to run marketing,
+                  subscriptions, analytics, and operations.
+                </p>
+                <p>
+                  Over time, many of these apps continue to retain access to your store’s
+                  data — even when they’re no longer actively used.
+                </p>
+              </div>
             </div>
-          </Link>
 
-          <nav className="font-display hidden items-center gap-8 text-base font-semibold text-slate-200/80 md:flex">
-            <Link
-              href="/why-it-matters"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              Why It Matters
-            </Link>
-            <Link
-              href="/what-we-check"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              What We Check
-            </Link>
-            <Link
-              href="/how-it-works"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              How it Works
-            </Link>
-            <Link
-              href="/pricing"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="/faq"
-              className="text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              FAQ
-            </Link>
-            <div className="rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 p-[2px]">
-              <button className="font-display w-full rounded-full bg-[#050816] px-5 py-2 text-sm font-semibold uppercase tracking-wide text-amber-100/90 transition hover:bg-[#0a0f1a] hover:text-amber-50">
-                Login
-              </button>
+            <div className="w-full">
+              <ul className="flex w-full flex-col gap-3 text-left text-lg leading-relaxed text-white/80 sm:gap-4 sm:text-xl sm:leading-[1.8]">
+                <li className="flex items-start gap-3">
+                  <span
+                    className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center text-sm"
+                    aria-hidden
+                  >
+                    🐾
+                  </span>
+                  <span>Customer data (PII)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span
+                    className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center text-sm"
+                    aria-hidden
+                  >
+                    🐾
+                  </span>
+                  <span>Order history</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span
+                    className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center text-sm"
+                    aria-hidden
+                  >
+                    🐾
+                  </span>
+                  <span>Product and inventory data</span>
+                </li>
+              </ul>
             </div>
-          </nav>
-        </div>
-      </header>
 
-      <main className="relative z-10 mx-auto flex max-w-5xl flex-col px-6 pb-24 pt-12 sm:px-8 lg:px-0">
-        <div className="mx-auto mb-2 flex w-full max-w-2xl justify-center text-sm text-slate-300/85">
-          <SmoothLink
-            href="/"
-            className="inline-flex items-center gap-2 text-[14px] font-medium text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-          >
-            <span className="text-[16px]">↑</span>
-            <span>Back to Home</span>
-          </SmoothLink>
-        </div>
-
-        <div className="mx-auto max-w-2xl text-center mt-16">
-          <p className="text-center">
-            <span
-              className="inline-block text-2xl font-semibold uppercase tracking-[0.28em] md:text-3xl"
-              style={{
-                background: "linear-gradient(90deg, #FFD36A, #FFB200, #FFD36A)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              Why It Matters
-            </span>
-          </p>
-          <p className="mt-6 text-[22px] leading-[1.7] text-white/72">
-            Most Shopify stores rely on multiple third-party apps to run marketing,
-            subscriptions, analytics, and operations.
-          </p>
-          <p className="mt-2 text-[22px] leading-[1.7] text-white/72">
-            Over time, many of these apps continue to retain access to your store’s data —
-            even when they’re no longer actively used.
-          </p>
-        </div>
-
-        <section className="mx-auto mt-4 w-full max-w-[700px]">
-          <ul className="mx-auto space-y-2 text-[20px] leading-[1.8] text-white/80 text-left max-w-[640px]">
-            <li className="flex items-start gap-3 pl-0">
-              <span className="mt-1 inline-flex h-4 w-4 items-center justify-center text-[14px] bg-gradient-to-tr from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
-                🐾
-              </span>
-              <span>Customer data (PII)</span>
-            </li>
-            <li className="flex items-start gap-3 pl-0">
-              <span className="mt-1 inline-flex h-4 w-4 items-center justify-center text-[14px] bg-gradient-to-tr from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
-                🐾
-              </span>
-              <span>Order history</span>
-            </li>
-            <li className="flex items-start gap-3 pl-0">
-              <span className="mt-1 inline-flex h-4 w-4 items-center justify-center text-[14px] bg-gradient-to-tr from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
-                🐾
-              </span>
-              <span>Product and inventory data</span>
-            </li>
-          </ul>
-
-          <p className="mt-4 text-[22px] leading-[1.7] text-white/72 text-center max-w-2xl mx-auto">
-            In many cases, apps have broader access than necessary.
-          </p>
-          <p className="mt-2 text-[22px] leading-[1.7] text-white/72 text-center max-w-2xl mx-auto">
-            Without regular review, this creates unnecessary exposure and potential risk.
-          </p>
-          <p className="mt-2 text-[22px] leading-[1.7] text-white/90 font-semibold text-center max-w-2xl mx-auto">
-            Most Shopify stores we review have more app access than{"\u00A0"}expected.
-          </p>
-        </section>
+            <div className="mx-auto flex w-full max-w-prose flex-col gap-4 text-center text-lg leading-relaxed text-white/72 sm:gap-5 sm:text-xl sm:leading-[1.7]">
+              <p>In many cases, apps have broader access than necessary.</p>
+              <p>
+                Without regular review, this creates unnecessary exposure and potential
+                risk.
+              </p>
+              <p className="font-semibold text-white/90">
+                Most Shopify stores we review have more app access than expected.
+              </p>
+            </div>
+          </div>
+        </InternalPageShell>
 
         <PawScrollButton
           href="/what-we-check"
@@ -158,8 +101,7 @@ export default function WhyItMattersPage() {
           position="higher"
           mode="fixed"
         />
-      </main>
+      </SiteMain>
     </div>
   );
 }
-

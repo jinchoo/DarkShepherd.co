@@ -23,6 +23,13 @@
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
+}
+
+/* Site-wide horizontal padding + max width (matches Tailwind max-w-[1280px]) */
+.ds-site-container {
+  padding-left: clamp(1rem, 4vw, 3rem);
+  padding-right: clamp(1rem, 4vw, 3rem);
 }
 
 html {

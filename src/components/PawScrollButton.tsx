@@ -56,7 +56,7 @@ export function PawScrollButton({
         "paw-pulse",
         positionClass,
         bottomClass,
-        "left-1/2 z-50 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
+        "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
       ].join(" ")}
       aria-label={ariaLabel}
     >
