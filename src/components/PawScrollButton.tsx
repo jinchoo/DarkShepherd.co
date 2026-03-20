@@ -28,7 +28,8 @@ export function PawScrollButton({
     () => new Set(["/what-we-check", "/how-it-works", "/pricing"]),
     [],
   );
-  const isBottomTriggeredRoute = bottomTriggeredRoutes.has(pathname ?? "");
+  const normalizedPathname = (pathname ?? "").replace(/\/$/, "");
+  const isBottomTriggeredRoute = bottomTriggeredRoutes.has(normalizedPathname);
   const [isVisible, setIsVisible] = React.useState(!isBottomTriggeredRoute);
   const didScrollRef = React.useRef(false);
 
@@ -42,20 +43,26 @@ export function PawScrollButton({
     didScrollRef.current = false;
 
     const updateVisibility = () => {
-      const doc = document.documentElement;
-      const body = document.body;
-      const scrollHeight = Math.max(doc.scrollHeight, body?.scrollHeight ?? 0);
-      const viewportBottom = window.scrollY + window.innerHeight;
+      const scrollingEl =
+        document.scrollingElement ?? document.documentElement ?? document.body;
+      const scrollTop = scrollingEl.scrollTop ?? window.scrollY ?? 0;
+      const scrollHeight = scrollingEl.scrollHeight ?? document.documentElement.scrollHeight ?? 0;
+      const clientHeight = scrollingEl.clientHeight ?? window.innerHeight ?? 1;
+
+      const viewportBottom = scrollTop + clientHeight;
       const remaining = scrollHeight - viewportBottom;
-      const scrollable = Math.max(scrollHeight - window.innerHeight, 1);
-      const progress = window.scrollY / scrollable;
+      const scrollable = Math.max(scrollHeight - clientHeight, 1);
+      const progress = scrollTop / scrollable;
+
+      // Flip to "user scrolled" once there's meaningful scrollTop.
+      if (scrollTop > 10) didScrollRef.current = true;
+
       const nearBottom = remaining <= 420 || progress >= 0.72;
       setIsVisible(didScrollRef.current && nearBottom);
     };
 
     updateVisibility();
     const onScroll = () => {
-      didScrollRef.current = true;
       updateVisibility();
     };
     window.addEventListener("scroll", onScroll, { passive: true });
