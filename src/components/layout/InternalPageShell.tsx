@@ -36,7 +36,7 @@ export function InternalPageShell({
     <div
       className={[
         "flex w-full min-w-0 flex-col",
-        "pt-20 md:pt-24 lg:pt-28",
+        "pt-8 md:pt-10 lg:pt-12",
         "pb-16 md:pb-20",
         className,
       ].join(" ")}
@@ -67,7 +67,7 @@ export function InternalBackLinkRow({
     <div
       className={[
         "flex w-full justify-center",
-        "pb-8 md:pb-10",
+        "pb-4 md:pb-6",
         className,
       ].join(" ")}
     >
