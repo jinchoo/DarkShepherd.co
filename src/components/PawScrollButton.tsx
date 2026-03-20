@@ -39,10 +39,16 @@ export function PawScrollButton({
     }
 
     const updateVisibility = () => {
-      const scrolledBottom = window.scrollY + window.innerHeight;
-      const remaining = document.documentElement.scrollHeight - scrolledBottom;
+      const doc = document.documentElement;
+      const body = document.body;
+      const scrollHeight = Math.max(doc.scrollHeight, body?.scrollHeight ?? 0);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      const remaining = scrollHeight - viewportBottom;
+      const scrollable = Math.max(scrollHeight - window.innerHeight, 1);
+      const progress = window.scrollY / scrollable;
       const hasScrolledDown = window.scrollY > 48;
-      setIsVisible(hasScrolledDown && remaining <= 220);
+      const nearBottom = remaining <= 420 || progress >= 0.72;
+      setIsVisible(hasScrolledDown && nearBottom);
     };
 
     updateVisibility();
