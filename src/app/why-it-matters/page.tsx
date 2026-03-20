@@ -54,7 +54,7 @@ export default function WhyItMattersPage() {
               <ul className="flex w-full flex-col gap-3 text-left text-lg leading-relaxed text-white/80 sm:gap-4 sm:text-xl sm:leading-[1.8]">
                 <li className="flex items-start gap-3">
                   <span
-                    className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center text-sm"
+                    className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                     aria-hidden
                   >
                     🐾
@@ -63,7 +63,7 @@ export default function WhyItMattersPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span
-                    className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center text-sm"
+                    className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                     aria-hidden
                   >
                     🐾
@@ -72,7 +72,7 @@ export default function WhyItMattersPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span
-                    className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center text-sm"
+                    className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                     aria-hidden
                   >
                     🐾

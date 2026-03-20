@@ -89,11 +89,13 @@ export function PawScrollButton({
       href={href}
       onClick={handleClick}
       className={[
-        "paw-pulse",
+        isVisible ? "paw-pulse" : "",
         positionClass,
         bottomClass,
-        "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
-        isVisible ? "opacity-100" : "pointer-events-none opacity-0",
+        "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full bg-amber-400/10 transition-all duration-300 hover:bg-amber-400/20",
+        isVisible
+          ? "opacity-100 translate-y-0 scale-100"
+          : "opacity-0 translate-y-4 scale-90 pointer-events-none",
       ].join(" ")}
       aria-label={ariaLabel}
     >

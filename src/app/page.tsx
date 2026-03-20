@@ -54,7 +54,7 @@ export default function Home() {
                 <ul className="space-y-2.5 text-sm text-slate-300/90 sm:space-y-3 sm:text-base">
                   <li className="flex items-start gap-2">
                     <span
-                      className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center text-xs leading-none text-transparent"
+                      className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                       aria-hidden
                     >
                       🐾
@@ -63,7 +63,7 @@ export default function Home() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span
-                      className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center text-xs leading-none text-transparent"
+                      className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                       aria-hidden
                     >
                       🐾
@@ -72,7 +72,7 @@ export default function Home() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span
-                      className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center text-xs leading-none text-transparent"
+                      className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                       aria-hidden
                     >
                       🐾
