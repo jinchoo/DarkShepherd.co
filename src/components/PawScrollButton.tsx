@@ -38,7 +38,11 @@ export function PawScrollButton({
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();
-    const navigate = () => router.push(href);
+    const navigate = () => {
+      // Ensure internal pages render at the top even if scroll position is preserved.
+      window.scrollTo(0, 0);
+      router.push(href);
+    };
     if (typeof document !== "undefined" && "startViewTransition" in document) {
       (document as Document & {
         startViewTransition: (cb: () => void | Promise<void>) => void;

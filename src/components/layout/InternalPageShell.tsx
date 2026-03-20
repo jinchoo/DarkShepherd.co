@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ScrollToTopOnMount } from "./ScrollToTopOnMount";
 
 export type InternalPageVariant = "narrow" | "medium" | "wide";
 
@@ -40,6 +41,7 @@ export function InternalPageShell({
         className,
       ].join(" ")}
     >
+      <ScrollToTopOnMount />
       <div
         className={[
           "mx-auto w-full min-w-0",

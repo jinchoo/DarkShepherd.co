@@ -7,7 +7,10 @@ export function BackToHomeLink() {
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();
-    const navigate = () => router.push("/");
+    const navigate = () => {
+      window.scrollTo(0, 0);
+      router.push("/");
+    };
     if (typeof document !== "undefined" && "startViewTransition" in document) {
       (document as Document & { startViewTransition: (cb: () => void | Promise<void>) => void }).startViewTransition(navigate);
     } else {
