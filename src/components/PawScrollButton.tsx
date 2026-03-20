@@ -67,6 +67,11 @@ export function PawScrollButton({
       : "bottom-6";
 
   const positionClass = mode === "fixed" ? "fixed" : "absolute";
+  const isBottomTriggeredRoute = bottomTriggeredRoutes.has(pathname ?? "");
+
+  if (isBottomTriggeredRoute && !isVisible) {
+    return null;
+  }
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();
@@ -89,13 +94,10 @@ export function PawScrollButton({
       href={href}
       onClick={handleClick}
       className={[
-        isVisible ? "paw-pulse" : "",
+        "paw-pulse",
         positionClass,
         bottomClass,
-        "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full bg-amber-400/10 transition-all duration-300 hover:bg-amber-400/20",
-        isVisible
-          ? "opacity-100 translate-y-0 scale-100"
-          : "opacity-0 translate-y-4 scale-90 pointer-events-none",
+        "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
       ].join(" ")}
       aria-label={ariaLabel}
     >
