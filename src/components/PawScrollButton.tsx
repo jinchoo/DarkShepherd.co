@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 type PawScrollButtonProps = {
   href?: string;
@@ -22,6 +22,38 @@ export function PawScrollButton({
   bottomOverrideClassName,
 }: PawScrollButtonProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const [isVisible, setIsVisible] = React.useState(true);
+
+  const bottomTriggeredRoutes = React.useMemo(
+    () => new Set(["/what-we-check", "/how-it-works", "/pricing"]),
+    [],
+  );
+
+  React.useEffect(() => {
+    const isBottomTriggeredRoute = bottomTriggeredRoutes.has(pathname ?? "");
+
+    // Keep existing always-visible behavior for all non-target routes.
+    if (!isBottomTriggeredRoute) {
+      setIsVisible(true);
+      return;
+    }
+
+    const updateVisibility = () => {
+      const scrolledBottom = window.scrollY + window.innerHeight;
+      const remaining = document.documentElement.scrollHeight - scrolledBottom;
+      setIsVisible(remaining <= 220);
+    };
+
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+    };
+  }, [pathname, bottomTriggeredRoutes]);
 
   const bottomClass =
     bottomOverrideClassName ??
@@ -61,6 +93,7 @@ export function PawScrollButton({
         positionClass,
         bottomClass,
         "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
+        isVisible ? "opacity-100" : "pointer-events-none opacity-0",
       ].join(" ")}
       aria-label={ariaLabel}
     >
