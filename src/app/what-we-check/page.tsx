@@ -99,7 +99,7 @@ export default function WhatWeCheckPage() {
           </div>
         </InternalPageShell>
 
-        <PawScrollButton href="/how-it-works" ariaLabel="Go to How it Works" />
+        <PawScrollButton href="/how-it-works" ariaLabel="Go to How it Works" position="higher" mode="fixed" />
       </SiteMain>
     </div>
   );

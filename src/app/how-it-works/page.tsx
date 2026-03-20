@@ -107,7 +107,7 @@ export default function HowItWorksPage() {
           </div>
         </InternalPageShell>
 
-        <PawScrollButton href="/pricing" ariaLabel="Go to Pricing" />
+        <PawScrollButton href="/pricing" ariaLabel="Go to Pricing" position="higher" mode="fixed" />
       </SiteMain>
     </div>
   );

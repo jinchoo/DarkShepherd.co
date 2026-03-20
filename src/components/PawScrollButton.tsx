@@ -25,7 +25,7 @@ export function PawScrollButton({
   const pathname = usePathname();
 
   const bottomTriggeredRoutes = React.useMemo(
-    () => new Set(["/what-we-check", "/how-it-works", "/pricing"]),
+    () => new Set(),
     [],
   );
   const normalizedPathname = (pathname ?? "").replace(/\/$/, "");
@@ -42,12 +42,27 @@ export function PawScrollButton({
 
     didScrollRef.current = false;
 
+    const scrollingEl =
+      document.scrollingElement ?? document.documentElement ?? document.body;
+
     const updateVisibility = () => {
-      const scrollingEl =
-        document.scrollingElement ?? document.documentElement ?? document.body;
-      const scrollTop = scrollingEl.scrollTop ?? window.scrollY ?? 0;
-      const scrollHeight = scrollingEl.scrollHeight ?? document.documentElement.scrollHeight ?? 0;
-      const clientHeight = scrollingEl.clientHeight ?? window.innerHeight ?? 1;
+      // Use robust measurements: sometimes `document.scrollingElement` reports 0
+      // while `window.scrollY` is the real scroll position (or vice versa).
+      const elScrollTop = scrollingEl.scrollTop ?? 0;
+      const winScrollTop = window.scrollY ?? 0;
+      const scrollTop = Math.max(elScrollTop, winScrollTop);
+
+      const docEl = document.documentElement;
+      const body = document.body;
+      const scrollHeight =
+        Math.max(
+          scrollingEl.scrollHeight ?? 0,
+          docEl?.scrollHeight ?? 0,
+          body?.scrollHeight ?? 0,
+        ) || 0;
+
+      const clientHeight =
+        Math.max(scrollingEl.clientHeight ?? 0, window.innerHeight ?? 1) || 1;
 
       const viewportBottom = scrollTop + clientHeight;
       const remaining = scrollHeight - viewportBottom;
@@ -66,10 +81,12 @@ export function PawScrollButton({
       updateVisibility();
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    scrollingEl.addEventListener("scroll", onScroll, { passive: true } as AddEventListenerOptions);
     window.addEventListener("resize", updateVisibility);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
+      scrollingEl.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", updateVisibility);
     };
   }, [isBottomTriggeredRoute]);
@@ -87,9 +104,7 @@ export function PawScrollButton({
 
   const positionClass = mode === "fixed" ? "fixed" : "absolute";
 
-  if (isBottomTriggeredRoute && !isVisible) {
-    return null;
-  }
+  // bottom-trigger route gating disabled by design (see bottomTriggeredRoutes).
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();

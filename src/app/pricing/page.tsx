@@ -127,7 +127,7 @@ export default function PricingPage() {
           </section>
         </InternalPageShell>
 
-        <PawScrollButton href="/faq" ariaLabel="Go to FAQ" position="higher" />
+        <PawScrollButton href="/faq" ariaLabel="Go to FAQ" position="higher" mode="fixed" />
       </SiteMain>
     </div>
   );
