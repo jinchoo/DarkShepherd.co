@@ -23,16 +23,15 @@ export function PawScrollButton({
 }: PawScrollButtonProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = React.useState(true);
 
   const bottomTriggeredRoutes = React.useMemo(
     () => new Set(["/what-we-check", "/how-it-works", "/pricing"]),
     [],
   );
+  const isBottomTriggeredRoute = bottomTriggeredRoutes.has(pathname ?? "");
+  const [isVisible, setIsVisible] = React.useState(!isBottomTriggeredRoute);
 
   React.useEffect(() => {
-    const isBottomTriggeredRoute = bottomTriggeredRoutes.has(pathname ?? "");
-
     // Keep existing always-visible behavior for all non-target routes.
     if (!isBottomTriggeredRoute) {
       setIsVisible(true);
@@ -53,7 +52,7 @@ export function PawScrollButton({
       window.removeEventListener("scroll", updateVisibility);
       window.removeEventListener("resize", updateVisibility);
     };
-  }, [pathname, bottomTriggeredRoutes]);
+  }, [isBottomTriggeredRoute]);
 
   const bottomClass =
     bottomOverrideClassName ??
@@ -67,7 +66,6 @@ export function PawScrollButton({
       : "bottom-6";
 
   const positionClass = mode === "fixed" ? "fixed" : "absolute";
-  const isBottomTriggeredRoute = bottomTriggeredRoutes.has(pathname ?? "");
 
   if (isBottomTriggeredRoute && !isVisible) {
     return null;

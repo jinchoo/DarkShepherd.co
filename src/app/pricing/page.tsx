@@ -56,7 +56,7 @@ export default function PricingPage() {
                     </span>
                   </h1>
                 </div>
-                <div className="mx-auto flex w-full max-w-prose flex-col gap-3 text-left text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.7]">
+                <div className="mx-auto flex w-full max-w-prose flex-col gap-3 text-center text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.7]">
                   <p>
                     Every Shopify store is different. Pricing depends on your app stack,
                     integrations, and the level of review required.
@@ -127,7 +127,7 @@ export default function PricingPage() {
           </section>
         </InternalPageShell>
 
-        {null}
+        <PawScrollButton href="/faq" ariaLabel="Go to FAQ" position="higher" />
       </SiteMain>
     </div>
   );
