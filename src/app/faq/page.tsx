@@ -74,7 +74,7 @@ const faqs: FAQItem[] = [
 
 export default function FAQPage() {
   return (
-    <div className="font-display relative min-h-screen bg-[#050816] text-slate-100">
+    <div className="font-display relative bg-[#050816] text-slate-100">
       <SiteBackground />
       <SiteHeader />
       <SiteMain internal>
