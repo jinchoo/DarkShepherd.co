@@ -30,6 +30,7 @@ export function PawScrollButton({
   );
   const isBottomTriggeredRoute = bottomTriggeredRoutes.has(pathname ?? "");
   const [isVisible, setIsVisible] = React.useState(!isBottomTriggeredRoute);
+  const didScrollRef = React.useRef(false);
 
   React.useEffect(() => {
     // Keep existing always-visible behavior for all non-target routes.
@@ -37,6 +38,8 @@ export function PawScrollButton({
       setIsVisible(true);
       return;
     }
+
+    didScrollRef.current = false;
 
     const updateVisibility = () => {
       const doc = document.documentElement;
@@ -46,17 +49,20 @@ export function PawScrollButton({
       const remaining = scrollHeight - viewportBottom;
       const scrollable = Math.max(scrollHeight - window.innerHeight, 1);
       const progress = window.scrollY / scrollable;
-      const hasScrolledDown = window.scrollY > 48;
       const nearBottom = remaining <= 420 || progress >= 0.72;
-      setIsVisible(hasScrolledDown && nearBottom);
+      setIsVisible(didScrollRef.current && nearBottom);
     };
 
     updateVisibility();
-    window.addEventListener("scroll", updateVisibility, { passive: true });
+    const onScroll = () => {
+      didScrollRef.current = true;
+      updateVisibility();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", updateVisibility);
 
     return () => {
-      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", updateVisibility);
     };
   }, [isBottomTriggeredRoute]);
