@@ -41,9 +41,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://calendly.com" crossOrigin="anonymous" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${spaceGrotesk.variable} flex min-h-screen flex-col antialiased`}
       >
-        {children}
+        <main className="flex-1">
+          {children}
+        </main>
       </body>
     </html>
   );

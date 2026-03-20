@@ -36,8 +36,8 @@ export function InternalPageShell({
     <div
       className={[
         "flex w-full min-w-0 flex-col",
-        "pt-24 md:pt-28 lg:pt-32",
-        "pb-20 md:pb-24 lg:pb-28",
+        "pt-20 md:pt-24 lg:pt-28",
+        "pb-16 md:pb-20",
         className,
       ].join(" ")}
     >
