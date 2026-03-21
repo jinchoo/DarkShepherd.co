@@ -25,7 +25,7 @@ export default function HowItWorksPage() {
             </SmoothLink>
           </InternalBackLinkRow>
 
-          <div className="how-it-works-section flex w-full flex-col gap-10 sm:gap-12 md:gap-16 lg:gap-18">
+          <div className="how-it-works-section flex w-full flex-col gap-10 sm:gap-12 lg:gap-16">
             <div className="flex w-full flex-col items-center gap-5 text-center sm:gap-7 md:gap-8">
               <p>
                 <span
@@ -35,7 +35,7 @@ export default function HowItWorksPage() {
                   How It Works
                 </span>
               </p>
-              <h1 className="max-w-5xl text-balance text-3xl font-semibold tracking-[-0.03em] sm:text-4xl md:text-5xl lg:text-6xl">
+              <h1 className="max-w-5xl text-balance text-3xl font-semibold tracking-[-0.03em] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] xl:leading-[1.08]">
                 <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
                   A simple, read-only review{" "}
                 </span>
@@ -53,15 +53,15 @@ export default function HowItWorksPage() {
                   access
                 </span>
               </h1>
-              <p className="mx-auto max-w-3xl text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.7] md:text-xl">
+              <p className="mx-auto max-w-3xl text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.75] md:text-xl">
                 DarkShepherd helps you see which third-party apps can access store,
                 customer, and order data—so you can reduce risk without disrupting your
                 operations.
               </p>
             </div>
 
-            <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3 md:gap-6 lg:gap-8">
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8 lg:p-9">
+            <div className="grid w-full grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-3 lg:gap-8">
+              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-7 lg:p-9">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-lg font-semibold text-slate-950">
                   1
                 </div>
@@ -74,7 +74,7 @@ export default function HowItWorksPage() {
                 </p>
               </div>
 
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8 lg:p-9">
+              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-7 lg:p-9">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-lg font-semibold text-slate-950">
                   2
                 </div>
@@ -87,7 +87,7 @@ export default function HowItWorksPage() {
                 </p>
               </div>
 
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8 lg:p-9">
+              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-7 lg:p-9">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-lg font-semibold text-slate-950">
                   3
                 </div>
@@ -107,7 +107,13 @@ export default function HowItWorksPage() {
           </div>
         </InternalPageShell>
 
-        <PawScrollButton href="/pricing" ariaLabel="Go to Pricing" position="higher" mode="fixed" />
+        <PawScrollButton
+          href="/pricing"
+          ariaLabel="Go to Pricing"
+          position="higher"
+          mode="fixed"
+          bottomOverrideClassName="bottom-4 sm:bottom-5 lg:bottom-6"
+        />
       </SiteMain>
     </div>
   );
