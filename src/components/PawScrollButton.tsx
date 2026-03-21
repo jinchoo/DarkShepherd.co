@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type PawScrollButtonProps = {
   href?: string;
@@ -17,37 +17,15 @@ type PawScrollButtonProps = {
 export function PawScrollButton({
   href = "/how-it-works",
   ariaLabel = "Go to How it Works",
-  position = "higher",
-  mode = "fixed",
-  bottomOverrideClassName,
 }: PawScrollButtonProps) {
   const router = useRouter();
-  const pathname = usePathname();
-
-  const bottomTriggeredRoutes = React.useMemo(
-    () => new Set(),
-    [],
-  );
-  const normalizedPathname = (pathname ?? "").replace(/\/$/, "");
-  const isBottomTriggeredRoute = bottomTriggeredRoutes.has(normalizedPathname);
-  const [isVisible, setIsVisible] = React.useState(!isBottomTriggeredRoute);
-  const didScrollRef = React.useRef(false);
+  const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
-    // Keep existing always-visible behavior for all non-target routes.
-    if (!isBottomTriggeredRoute) {
-      setIsVisible(true);
-      return;
-    }
-
-    didScrollRef.current = false;
-
     const scrollingEl =
       document.scrollingElement ?? document.documentElement ?? document.body;
 
     const updateVisibility = () => {
-      // Use robust measurements: sometimes `document.scrollingElement` reports 0
-      // while `window.scrollY` is the real scroll position (or vice versa).
       const elScrollTop = scrollingEl.scrollTop ?? 0;
       const winScrollTop = window.scrollY ?? 0;
       const scrollTop = Math.max(elScrollTop, winScrollTop);
@@ -64,24 +42,17 @@ export function PawScrollButton({
       const clientHeight =
         Math.max(scrollingEl.clientHeight ?? 0, window.innerHeight ?? 1) || 1;
 
-      const viewportBottom = scrollTop + clientHeight;
-      const remaining = scrollHeight - viewportBottom;
       const scrollable = Math.max(scrollHeight - clientHeight, 1);
       const progress = scrollTop / scrollable;
-
-      // Flip to "user scrolled" once there's meaningful scrollTop.
-      if (scrollTop > 10) didScrollRef.current = true;
-
-      const nearBottom = remaining <= 420 || progress >= 0.72;
-      setIsVisible(didScrollRef.current && nearBottom);
+      setIsVisible(progress >= 0.75);
     };
 
     updateVisibility();
-    const onScroll = () => {
-      updateVisibility();
-    };
+    const onScroll = () => updateVisibility();
     window.addEventListener("scroll", onScroll, { passive: true });
-    scrollingEl.addEventListener("scroll", onScroll, { passive: true } as AddEventListenerOptions);
+    scrollingEl.addEventListener("scroll", onScroll, {
+      passive: true,
+    } as AddEventListenerOptions);
     window.addEventListener("resize", updateVisibility);
 
     return () => {
@@ -89,22 +60,7 @@ export function PawScrollButton({
       scrollingEl.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", updateVisibility);
     };
-  }, [isBottomTriggeredRoute]);
-
-  const bottomClass =
-    bottomOverrideClassName ??
-    // Use positive offsets so the paw is fully visible even when parents clip overflow.
-    position === "lowest"
-      ? "bottom-8"
-      : position === "lower"
-      ? "bottom-6"
-      : position === "higher"
-      ? "bottom-[12px]"
-      : "bottom-6";
-
-  const positionClass = mode === "fixed" ? "fixed" : "absolute";
-
-  // bottom-trigger route gating disabled by design (see bottomTriggeredRoutes).
+  }, []);
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();
@@ -128,9 +84,8 @@ export function PawScrollButton({
       onClick={handleClick}
       className={[
         "paw-pulse",
-        positionClass,
-        bottomClass,
-        "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full bg-amber-400/10 transition hover:bg-amber-400/20",
+        "fixed left-1/2 bottom-4 z-50 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-amber-400/10 transition-opacity duration-300 hover:bg-amber-400/20",
+        isVisible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
       ].join(" ")}
       aria-label={ariaLabel}
     >
