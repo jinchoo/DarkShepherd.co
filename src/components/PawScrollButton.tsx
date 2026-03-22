@@ -20,28 +20,70 @@ export function PawScrollButton({
 }: PawScrollButtonProps) {
   const router = useRouter();
   const [isVisible, setIsVisible] = React.useState(false);
+  const buttonRef = React.useRef<HTMLAnchorElement | null>(null);
 
-  React.useEffect(() => {
-    const scrollingEl =
-      document.scrollingElement ?? document.documentElement ?? document.body;
-
-    const updateVisibility = () => {
-      const elScrollTop = scrollingEl.scrollTop ?? 0;
-      const winScrollTop = window.scrollY ?? 0;
-      const scrollTop = Math.max(elScrollTop, winScrollTop);
-
-      const docEl = document.documentElement;
-      const body = document.body;
+  const getScrollMetrics = React.useCallback((scrollContainer: HTMLElement | Window) => {
+    if (scrollContainer === window) {
+      const scrollingEl =
+        document.scrollingElement ?? document.documentElement ?? document.body;
+      const scrollTop = Math.max(scrollingEl.scrollTop ?? 0, window.scrollY ?? 0);
       const scrollHeight =
         Math.max(
           scrollingEl.scrollHeight ?? 0,
-          docEl?.scrollHeight ?? 0,
-          body?.scrollHeight ?? 0,
+          document.documentElement?.scrollHeight ?? 0,
+          document.body?.scrollHeight ?? 0,
         ) || 0;
-
       const clientHeight =
         Math.max(scrollingEl.clientHeight ?? 0, window.innerHeight ?? 1) || 1;
 
+      return { scrollTop, scrollHeight, clientHeight };
+    }
+
+    const element = scrollContainer as HTMLElement;
+
+    return {
+      scrollTop: element.scrollTop ?? 0,
+      scrollHeight: element.scrollHeight ?? 0,
+      clientHeight: element.clientHeight ?? 1,
+    };
+  }, []);
+
+  const getNearestScrollContainer = React.useCallback((start: HTMLElement | null) => {
+    let current = start?.parentElement ?? null;
+
+    while (current) {
+      const { overflowY } = window.getComputedStyle(current);
+      const isScrollable = /(auto|scroll|overlay)/.test(overflowY);
+
+      if (isScrollable && current.scrollHeight > current.clientHeight) {
+        return current;
+      }
+
+      current = current.parentElement;
+    }
+
+    return window;
+  }, []);
+
+  const resolveSamePageTarget = React.useCallback((targetHref: string) => {
+    if (typeof document === "undefined" || !targetHref.includes("#")) return null;
+
+    const url = new URL(targetHref, window.location.href);
+    if (url.origin !== window.location.origin || url.pathname !== window.location.pathname) {
+      return null;
+    }
+
+    const targetId = decodeURIComponent(url.hash.replace(/^#/, ""));
+    if (!targetId) return null;
+
+    return document.getElementById(targetId);
+  }, []);
+
+  React.useEffect(() => {
+    const scrollContainer = getNearestScrollContainer(buttonRef.current);
+
+    const updateVisibility = () => {
+      const { scrollTop, scrollHeight, clientHeight } = getScrollMetrics(scrollContainer);
       const scrollable = Math.max(scrollHeight - clientHeight, 1);
       const progress = scrollTop / scrollable;
       setIsVisible(progress >= 0.75);
@@ -49,26 +91,42 @@ export function PawScrollButton({
 
     updateVisibility();
     const onScroll = () => updateVisibility();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    scrollingEl.addEventListener("scroll", onScroll, {
-      passive: true,
-    } as AddEventListenerOptions);
+
+    if (scrollContainer === window) {
+      window.addEventListener("scroll", onScroll, { passive: true });
+    } else {
+      scrollContainer.addEventListener("scroll", onScroll, {
+        passive: true,
+      } as AddEventListenerOptions);
+    }
+
     window.addEventListener("resize", updateVisibility);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      scrollingEl.removeEventListener("scroll", onScroll);
+      if (scrollContainer === window) {
+        window.removeEventListener("scroll", onScroll);
+      } else {
+        scrollContainer.removeEventListener("scroll", onScroll);
+      }
       window.removeEventListener("resize", updateVisibility);
     };
-  }, []);
+  }, [getNearestScrollContainer, getScrollMetrics]);
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();
+
+    const samePageTarget = resolveSamePageTarget(href);
+    if (samePageTarget) {
+      samePageTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
     const navigate = () => {
       // Ensure internal pages render at the top even if scroll position is preserved.
       window.scrollTo(0, 0);
-      router.push(href);
+      router.push(href, { scroll: true });
     };
+
     if (typeof document !== "undefined" && "startViewTransition" in document) {
       (document as Document & {
         startViewTransition: (cb: () => void | Promise<void>) => void;
@@ -80,11 +138,12 @@ export function PawScrollButton({
 
   return (
     <a
+      ref={buttonRef}
       href={href}
       onClick={handleClick}
       className={[
         "paw-pulse",
-        "fixed left-1/2 bottom-4 z-50 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-amber-400/10 transition-opacity duration-300 hover:bg-amber-400/20",
+        "fixed left-1/2 bottom-4 z-50 flex h-14 w-14 -translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-amber-400/10 transition-opacity duration-300 hover:bg-amber-400/20",
         isVisible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
       ].join(" ")}
       aria-label={ariaLabel}
