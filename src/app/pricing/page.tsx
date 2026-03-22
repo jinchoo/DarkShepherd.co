@@ -37,7 +37,7 @@ export default function PricingPage() {
             className="flex w-full min-h-[100dvh] min-w-0 flex-1 items-start"
             aria-labelledby="pricing-heading"
           >
-            <div className="flex w-full min-w-0 flex-col items-center gap-8 pt-8 pb-20 text-center sm:gap-10 sm:pt-10 sm:pb-20 md:pt-12 lg:gap-12 lg:pt-14 lg:pb-24">
+            <div className="flex w-full min-w-0 flex-col items-center gap-8 pt-4 pb-24 text-center sm:gap-10 sm:pt-6 sm:pb-24 md:pt-8 lg:gap-12 lg:pt-10 lg:pb-28">
               <div className="flex w-full flex-col items-center gap-5 sm:gap-6">
                 <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
                   <p>
