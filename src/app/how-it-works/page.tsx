@@ -34,7 +34,7 @@ export default function HowItWorksPage() {
               className="flex w-full min-h-[100dvh] min-w-0 flex-1 items-start"
               aria-labelledby="how-it-works-heading"
             >
-              <div className="how-it-works-section flex w-full min-w-0 flex-col gap-7 pt-1 pb-20 text-center sm:gap-9 sm:pt-2 sm:pb-24 lg:gap-12 lg:pt-3 xl:pt-4">
+              <div className="how-it-works-section flex w-full min-w-0 flex-col gap-5 pt-1 pb-20 text-center sm:gap-6 sm:pt-2 sm:pb-24 lg:gap-8 lg:pt-3 xl:pt-4">
                 <div className="flex w-full flex-col items-center gap-5 sm:gap-7 md:gap-8">
                   <p>
                     <span
@@ -72,7 +72,7 @@ export default function HowItWorksPage() {
                   </p>
                 </div>
 
-                <div className="grid w-full grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+                <div className="-mt-1 grid w-full grid-cols-1 gap-4 sm:-mt-2 sm:gap-5 lg:-mt-3 lg:grid-cols-3 lg:gap-6">
                   <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-7 lg:p-9">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-lg font-semibold text-slate-950">
                       1
@@ -113,7 +113,7 @@ export default function HowItWorksPage() {
                   </div>
                 </div>
 
-                <p className="-mt-1 text-center text-sm text-white/55 sm:-mt-2 sm:text-[15px]">
+                <p className="-mt-3 text-center text-sm text-white/55 sm:-mt-4 sm:text-[15px]">
                   Read-only process. No changes made without your approval.
                 </p>
               </div>
