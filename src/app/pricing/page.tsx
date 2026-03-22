@@ -15,11 +15,15 @@ import { marketingEyebrowStyle } from "@/lib/marketing-styles";
  */
 export default function PricingPage() {
   return (
-    <div className="font-display relative bg-[#050816] text-slate-100">
+    <div className="font-display relative flex min-h-[100dvh] flex-col bg-[#050816] text-slate-100">
       <SiteBackground />
       <SiteHeader />
-      <SiteMain internal>
-        <InternalPageShell variant="narrow">
+      <SiteMain internal className="flex min-h-0 flex-1 flex-col">
+        <InternalPageShell
+          variant="narrow"
+          className="flex min-h-[calc(100dvh-4.25rem)] flex-1 justify-start pb-24 pt-6 sm:min-h-[calc(100dvh-4.75rem)] sm:pt-8 sm:pb-28 lg:pt-10 lg:pb-32"
+          contentClassName="flex min-h-0 flex-1 flex-col justify-center"
+        >
           <InternalBackLinkRow>
             <SmoothLink
               href="/how-it-works"
@@ -29,8 +33,8 @@ export default function PricingPage() {
             </SmoothLink>
           </InternalBackLinkRow>
 
-          <section className="w-full" aria-labelledby="pricing-heading">
-            <div className="flex w-full min-w-0 flex-col items-center gap-8 sm:gap-10 lg:gap-12 text-center">
+          <section className="flex w-full min-h-0 flex-1 items-start" aria-labelledby="pricing-heading">
+            <div className="flex w-full min-w-0 flex-col items-center gap-8 pt-2 text-center sm:gap-10 sm:pt-4 lg:gap-12 lg:pt-6">
               <div className="flex w-full flex-col items-center gap-5 sm:gap-6">
                 <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
                   <p>
@@ -127,13 +131,7 @@ export default function PricingPage() {
           </section>
         </InternalPageShell>
 
-        <PawScrollButton
-          href="/faq"
-          ariaLabel="Go to FAQ"
-          position="higher"
-          mode="fixed"
-          bottomOverrideClassName="bottom-4 sm:bottom-5 lg:bottom-6"
-        />
+        <PawScrollButton href="/faq" ariaLabel="Go to FAQ" visibilityMode="always" />
       </SiteMain>
     </div>
   );

@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 type PawScrollButtonProps = {
   href?: string;
   ariaLabel?: string;
+  /** "always" keeps the paw visible immediately for hero-style pages. */
+  visibilityMode?: "scroll" | "always";
   /** "lower" moves the paw further down (e.g. on landing page); "higher" moves it slightly up */
   position?: "default" | "lower" | "higher" | "lowest";
   /** Use fixed positioning when you want it pinned to the viewport (e.g. home hero). */
@@ -17,6 +19,7 @@ type PawScrollButtonProps = {
 export function PawScrollButton({
   href = "/how-it-works",
   ariaLabel = "Go to How it Works",
+  visibilityMode = "scroll",
 }: PawScrollButtonProps) {
   const router = useRouter();
   const [isVisible, setIsVisible] = React.useState(false);
@@ -80,6 +83,11 @@ export function PawScrollButton({
   }, []);
 
   React.useEffect(() => {
+    if (visibilityMode === "always") {
+      setIsVisible(true);
+      return;
+    }
+
     const scrollContainer = getNearestScrollContainer(buttonRef.current);
 
     const updateVisibility = () => {
@@ -110,7 +118,7 @@ export function PawScrollButton({
       }
       window.removeEventListener("resize", updateVisibility);
     };
-  }, [getNearestScrollContainer, getScrollMetrics]);
+  }, [getNearestScrollContainer, getScrollMetrics, visibilityMode]);
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();
