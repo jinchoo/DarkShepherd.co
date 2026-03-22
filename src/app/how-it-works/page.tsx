@@ -34,7 +34,7 @@ export default function HowItWorksPage() {
               className="flex w-full min-h-[100dvh] min-w-0 flex-1 items-start"
               aria-labelledby="how-it-works-heading"
             >
-              <div className="how-it-works-section flex w-full min-w-0 flex-col gap-10 pt-3 pb-18 text-center sm:gap-12 sm:pt-4 sm:pb-22 lg:gap-16 lg:pt-6 xl:pt-8">
+              <div className="how-it-works-section flex w-full min-w-0 flex-col gap-10 pt-1 pb-20 text-center sm:gap-12 sm:pt-2 sm:pb-24 lg:gap-16 lg:pt-3 xl:pt-4">
                 <div className="flex w-full flex-col items-center gap-5 sm:gap-7 md:gap-8">
                   <p>
                     <span
