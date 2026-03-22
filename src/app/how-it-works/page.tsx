@@ -18,8 +18,8 @@ export default function HowItWorksPage() {
         <SiteMain internal className="flex min-h-0 flex-1 flex-col">
           <InternalPageShell
             variant="wide"
-            className="flex min-h-[calc(100dvh-4.25rem)] flex-1 justify-start pb-24 pt-6 sm:min-h-[calc(100dvh-4.75rem)] sm:pb-28 sm:pt-8 lg:pb-32 lg:pt-10"
-            contentClassName="flex min-h-0 flex-1 flex-col justify-center"
+            className="flex min-h-[calc(100dvh-4.25rem)] flex-1 justify-start pt-0 pb-0 sm:min-h-[calc(100dvh-4.75rem)]"
+            contentClassName="flex min-h-0 flex-1 flex-col"
           >
             <InternalBackLinkRow>
               <SmoothLink
@@ -30,8 +30,11 @@ export default function HowItWorksPage() {
               </SmoothLink>
             </InternalBackLinkRow>
 
-            <section className="flex w-full min-h-[100dvh] min-w-0 flex-1 items-start" aria-labelledby="how-it-works-heading">
-              <div className="how-it-works-section flex w-full min-w-0 flex-col gap-10 pt-2 text-center sm:gap-12 sm:pt-4 lg:gap-16 lg:pt-6">
+            <section
+              className="flex w-full min-h-[100dvh] min-w-0 flex-1 items-start"
+              aria-labelledby="how-it-works-heading"
+            >
+              <div className="how-it-works-section flex w-full min-w-0 flex-col gap-10 pt-20 pb-16 text-center sm:gap-12 sm:pt-24 sm:pb-20 lg:gap-16 lg:pt-28 xl:pt-32">
                 <div className="flex w-full flex-col items-center gap-5 sm:gap-7 md:gap-8">
                   <p>
                     <span

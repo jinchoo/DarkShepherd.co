@@ -21,8 +21,8 @@ export default function PricingPage() {
       <SiteMain internal className="flex min-h-0 flex-1 flex-col">
         <InternalPageShell
           variant="narrow"
-          className="flex min-h-[calc(100dvh-4.25rem)] flex-1 justify-start pb-24 pt-6 sm:min-h-[calc(100dvh-4.75rem)] sm:pt-8 sm:pb-28 lg:pt-10 lg:pb-32"
-          contentClassName="flex min-h-0 flex-1 flex-col justify-center"
+          className="flex min-h-[calc(100dvh-4.25rem)] flex-1 justify-start pt-0 pb-0 sm:min-h-[calc(100dvh-4.75rem)]"
+          contentClassName="flex min-h-0 flex-1 flex-col"
         >
           <InternalBackLinkRow>
             <SmoothLink
@@ -33,8 +33,11 @@ export default function PricingPage() {
             </SmoothLink>
           </InternalBackLinkRow>
 
-          <section className="flex w-full min-h-0 flex-1 items-start" aria-labelledby="pricing-heading">
-            <div className="flex w-full min-w-0 flex-col items-center gap-8 pt-2 text-center sm:gap-10 sm:pt-4 lg:gap-12 lg:pt-6">
+          <section
+            className="flex w-full min-h-[100dvh] min-w-0 flex-1 items-start"
+            aria-labelledby="pricing-heading"
+          >
+            <div className="flex w-full min-w-0 flex-col items-center gap-8 pt-20 pb-20 text-center sm:gap-10 sm:pt-24 sm:pb-20 md:pt-28 lg:gap-12 lg:pt-32 lg:pb-24">
               <div className="flex w-full flex-col items-center gap-5 sm:gap-6">
                 <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
                   <p>
