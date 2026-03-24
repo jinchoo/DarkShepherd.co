@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display, Space_Grotesk } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Playfair_Display,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,15 +42,25 @@ export default function RootLayout({
       <head>
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <link rel="dns-prefetch" href="https://calendly.com" />
-        <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://calendly.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://assets.calendly.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://calendly.com"
+          crossOrigin="anonymous"
+        />
+        <meta
+          name="google-site-verification"
+          content="9D1loVPNubgkBypuAy9hHoRs0WH9fd6zgdENp6cUcJY"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${spaceGrotesk.variable} flex min-h-screen flex-col antialiased`}
       >
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );
