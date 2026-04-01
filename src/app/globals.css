@@ -32,6 +32,13 @@ body {
   padding-right: clamp(1rem, 4vw, 3rem);
 }
 
+@supports (padding-left: max(0px)) {
+  .ds-site-container {
+    padding-left: max(env(safe-area-inset-left), clamp(1rem, 4vw, 3rem));
+    padding-right: max(env(safe-area-inset-right), clamp(1rem, 4vw, 3rem));
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }

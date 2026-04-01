@@ -15,11 +15,15 @@ import { marketingEyebrowStyle } from "@/lib/marketing-styles";
  */
 export default function PricingPage() {
   return (
-    <div className="font-display relative bg-[#050816] text-slate-100">
+    <div className="font-display relative flex min-h-[100dvh] flex-col bg-[#050816] text-slate-100">
       <SiteBackground />
       <SiteHeader />
-      <SiteMain internal>
-        <InternalPageShell variant="narrow">
+      <SiteMain internal className="flex min-h-0 flex-1 flex-col">
+        <InternalPageShell
+          variant="narrow"
+          className="flex min-h-[calc(100dvh-4.25rem)] flex-1 justify-start pt-0 pb-0 sm:min-h-[calc(100dvh-4.75rem)]"
+          contentClassName="flex min-h-0 flex-1 flex-col"
+        >
           <InternalBackLinkRow>
             <SmoothLink
               href="/how-it-works"
@@ -29,10 +33,13 @@ export default function PricingPage() {
             </SmoothLink>
           </InternalBackLinkRow>
 
-          <section className="w-full" aria-labelledby="pricing-heading">
-            <div className="flex w-full min-w-0 flex-col items-center gap-6 text-center sm:gap-8">
+          <section
+            className="flex w-full min-h-[100dvh] min-w-0 flex-1 items-start"
+            aria-labelledby="pricing-heading"
+          >
+            <div className="flex w-full min-w-0 flex-col items-center gap-8 pt-2 pb-24 text-center sm:gap-10 sm:pt-3 sm:pb-24 md:pt-4 lg:gap-12 lg:pt-6 lg:pb-28">
               <div className="flex w-full flex-col items-center gap-5 sm:gap-6">
-                <div className="flex w-full flex-col items-center gap-3 sm:gap-4">
+                <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
                   <p>
                     <span
                       className="inline-block text-xl font-semibold uppercase tracking-[0.22em] sm:text-2xl md:text-3xl md:tracking-[0.28em]"
@@ -56,7 +63,7 @@ export default function PricingPage() {
                     </span>
                   </h1>
                 </div>
-                <div className="mx-auto flex w-full max-w-prose flex-col gap-3 text-center text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.7]">
+                <div className="mx-auto flex w-full max-w-xl flex-col gap-3 sm:gap-4 text-center text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.75]">
                   <p>
                     Every Shopify store is different. Pricing depends on your app stack,
                     integrations, and the level of review required.
@@ -68,8 +75,8 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              <div className="flex w-full flex-col items-stretch gap-8 sm:gap-10">
-                <ul className="flex w-full flex-col gap-3 text-left text-base leading-relaxed text-white/80 sm:gap-4 sm:text-lg sm:leading-[1.8]">
+              <div className="flex w-full max-w-xl flex-col items-stretch gap-8 sm:gap-10">
+                <ul className="flex w-full flex-col gap-3 sm:gap-4 text-left text-base leading-relaxed text-white/80 sm:text-lg sm:leading-[1.8]">
                   <li className="flex items-start gap-3">
                     <span
                       className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
@@ -109,7 +116,7 @@ export default function PricingPage() {
                 </ul>
 
                 <div className="flex w-full flex-col items-center gap-6 sm:gap-8">
-                  <p className="max-w-prose text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.8]">
+                  <p className="max-w-xl text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.75]">
                     After the review, we’ll recommend next steps and pricing if ongoing
                     protection is still needed for your store.
                   </p>
@@ -127,7 +134,7 @@ export default function PricingPage() {
           </section>
         </InternalPageShell>
 
-        <PawScrollButton href="/faq" ariaLabel="Go to FAQ" position="higher" mode="fixed" />
+        <PawScrollButton href="/faq" ariaLabel="Go to FAQ" visibilityMode="always" />
       </SiteMain>
     </div>
   );

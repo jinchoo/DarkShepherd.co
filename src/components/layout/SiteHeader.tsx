@@ -7,7 +7,7 @@ import { CalendlyScheduleButton } from "@/components/CalendlyScheduleButton";
 import { SiteContainer } from "./SiteContainer";
 
 const navLinkClass =
-  "rounded-md px-2 py-1 text-sm text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent sm:px-3 sm:text-base";
+  "rounded-md px-2 py-1.5 text-sm text-slate-200/80 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent sm:px-3 sm:py-2 sm:text-base";
 
 const navItems = [
   { href: "/why-it-matters", label: "Why It Matters" },
@@ -31,10 +31,10 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-white/10 bg-[#050816]/80 backdrop-blur-md">
-      <SiteContainer className="relative flex min-h-[4rem] items-center justify-between gap-3 py-2 sm:min-h-[4.5rem] sm:gap-4">
+      <SiteContainer className="relative flex min-h-[4.25rem] items-center justify-between gap-3 py-2.5 sm:min-h-[4.75rem] sm:gap-5 sm:py-3">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 sm:gap-3"
+          className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3"
           onClick={() => setOpen(false)}
         >
           <Image
@@ -45,14 +45,14 @@ export function SiteHeader() {
             className="h-10 w-auto sm:h-12 lg:h-[52px]"
             priority
           />
-          <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-base font-semibold tracking-[0.06em] text-transparent sm:text-lg lg:text-xl">
+          <span className="truncate bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-sm font-semibold tracking-[0.06em] text-transparent sm:text-lg lg:text-xl">
             DarkShepherd
           </span>
         </Link>
 
         {/* Desktop nav */}
         <nav
-          className="hidden min-w-0 flex-1 items-center justify-end gap-2 lg:flex xl:gap-4"
+          className="hidden min-w-0 flex-1 items-center justify-end gap-1.5 lg:flex xl:gap-3"
           aria-label="Primary"
         >
           {navItems.map(({ href, label }) => (
@@ -60,7 +60,7 @@ export function SiteHeader() {
               {label}
             </Link>
           ))}
-          <CalendlyScheduleButton className="ml-1 shrink-0 rounded-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 px-4 py-2 text-xs font-semibold text-slate-950 shadow-[0_0_25px_rgba(251,191,36,0.45)] transition hover:brightness-110 sm:px-5 sm:text-sm">
+          <CalendlyScheduleButton className="ml-2 shrink-0 rounded-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 px-4 py-2.5 text-xs font-semibold text-slate-950 shadow-[0_0_25px_rgba(251,191,36,0.45)] transition hover:brightness-110 sm:px-5 sm:text-sm">
             Get Started
           </CalendlyScheduleButton>
         </nav>
@@ -93,19 +93,19 @@ export function SiteHeader() {
           id="site-mobile-nav"
           className="border-t border-white/10 bg-[#050816]/95 backdrop-blur-md lg:hidden"
         >
-          <SiteContainer className="flex flex-col gap-1 py-4">
+          <SiteContainer className="flex flex-col gap-1.5 py-4 sm:py-5">
             {navItems.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="rounded-lg px-3 py-3 text-base text-slate-100 transition hover:bg-white/5"
+                className="rounded-lg px-4 py-3 text-base text-slate-100 transition hover:bg-white/5"
                 onClick={() => setOpen(false)}
               >
                 {label}
               </Link>
             ))}
-            <div className="pt-2">
-              <CalendlyScheduleButton className="w-full rounded-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 px-5 py-3 text-center text-sm font-semibold text-slate-950 shadow-[0_0_25px_rgba(251,191,36,0.45)] transition hover:brightness-110">
+            <div className="pt-2 sm:pt-3">
+              <CalendlyScheduleButton className="w-full rounded-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 px-5 py-3.5 text-center text-sm font-semibold text-slate-950 shadow-[0_0_25px_rgba(251,191,36,0.45)] transition hover:brightness-110">
                 Get Started
               </CalendlyScheduleButton>
             </div>
