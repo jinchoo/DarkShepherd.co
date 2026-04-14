@@ -30,7 +30,8 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/10 bg-[#050816]/80 backdrop-blur-md">
+    <>
+    <header className="fixed inset-x-0 top-0 z-30 border-b border-white/10 bg-[#050816]/80 backdrop-blur-md">
       <SiteContainer className="relative flex min-h-[4rem] items-center justify-between gap-3 py-2 sm:min-h-[4.5rem] sm:gap-4">
         <Link
           href="/"
@@ -113,5 +114,8 @@ export function SiteHeader() {
         </div>
       ) : null}
     </header>
+    {/* Reserves space so page content does not sit under the fixed header */}
+    <div className="h-16 shrink-0 sm:h-[4.5rem]" aria-hidden />
+    </>
   );
 }

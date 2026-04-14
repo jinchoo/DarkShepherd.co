@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div
       id="top"
-      className="font-display relative flex min-h-[100dvh] flex-col overflow-x-hidden overflow-y-auto bg-[#050816] text-slate-100"
+      className="font-display relative flex min-h-[100dvh] min-w-0 flex-col bg-[#050816] text-slate-100"
     >
       <SiteBackground />
       <SiteHeader />
