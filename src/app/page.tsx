@@ -15,9 +15,9 @@ export default function Home() {
       <SiteHeader />
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-col">
-        <SiteContainer className="flex min-h-0 flex-1 flex-col pt-2 sm:pt-4 lg:pt-6">
+        <SiteContainer className="flex min-h-0 flex-1 flex-col pt-12 sm:pt-14 lg:pt-16">
           <section className="relative flex w-full min-w-0 flex-1 flex-col pb-6 lg:pb-10">
-            <div className="grid w-full min-w-0 flex-1 grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-8 xl:gap-12">
+            <div className="grid w-full min-w-0 grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-stretch lg:gap-8 xl:gap-12">
               <div className="relative z-10 min-w-0 max-w-2xl space-y-8 lg:space-y-10">
                 <div className="space-y-6 sm:space-y-8 lg:space-y-10">
                   <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-200/90 sm:text-sm sm:tracking-[0.35em]">
@@ -27,11 +27,10 @@ export default function Home() {
                   </p>
 
                   <h1 className="text-balance bg-gradient-to-r from-gray-300 via-gray-400 to-gray-600 bg-clip-text text-3xl font-semibold leading-[1.12] tracking-[-0.03em] text-transparent sm:text-4xl md:text-5xl lg:text-6xl">
-                    Know Exactly What Every{" "}
                     <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
-                      Shopify App
+                      Shopify Apps
                     </span>{" "}
-                    Can Access
+                    Can Still Access Your Data — Even After You Remove the Apps
                   </h1>
 
                   <p className="max-w-prose text-base leading-relaxed text-white/70 sm:text-lg md:text-xl">
@@ -39,15 +38,16 @@ export default function Home() {
                     <span className="font-semibold bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                       permission sprawl
                     </span>{" "}
-                    across your Shopify store—retaining access to customer, order, and
-                    store data longer than expected. DarkShepherd helps you see
-                    what&apos;s exposed and reduce risk without needing a security team.
+                    across your Shopify store—retaining access to customer,
+                    order, and store data longer than expected, which can lead to
+                    tracking inconsistencies, unexpected behavior, and increased
+                    risk across your{"\u00A0"}store.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                   <CalendlyScheduleButton className="inline-flex min-h-[3rem] w-full items-center justify-center rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 px-6 py-3 text-center text-sm font-semibold text-slate-950 shadow-[0_12px_30px_rgba(251,191,36,0.45)] transition hover:brightness-110 sm:w-auto sm:px-9 sm:text-base">
-                    Schedule Shopify Security Review
+                    Check My Store Access
                   </CalendlyScheduleButton>
                 </div>
 
@@ -68,7 +68,9 @@ export default function Home() {
                     >
                       🐾
                     </span>
-                    <span>Read-only analysis (no changes without approval)</span>
+                    <span>
+                      Read-only analysis (no changes without approval)
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span
@@ -82,8 +84,8 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="relative flex min-h-[220px] w-full min-w-0 items-center justify-center lg:min-h-[360px] lg:justify-end">
-                <div className="relative w-full max-w-[min(100%,20rem)] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[min(100%,28rem)]">
+              <div className="relative flex min-h-[220px] w-full min-w-0 items-center justify-center lg:h-full lg:min-h-0 lg:justify-end">
+                <div className="relative w-full max-w-[min(100%,20rem)] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[min(100%,28rem)] lg:-translate-y-5">
                   <div
                     className="pointer-events-none absolute inset-[8%] rounded-full bg-amber-400/10 blur-[50px] sm:blur-[70px]"
                     aria-hidden
