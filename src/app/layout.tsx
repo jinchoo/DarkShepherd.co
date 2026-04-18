@@ -28,7 +28,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "DarkShepherd | Shopify App Security & Store Risk Review",
+  title: "DarkShepherd | Shopify App Risk & Security Review",
   description:
     "DarkShepherd helps Shopify merchants see third-party app permissions, reduce permission sprawl, and lower store risk—with read-only analysis.",
   icons: {
