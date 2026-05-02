@@ -39,10 +39,10 @@ export function SiteHeader() {
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/darkshepherd_logo1_cropped.png"
+            src="/darkshepherd-nav-logo.png"
             alt="Dark Shepherd logo"
-            width={120}
-            height={120}
+            width={144}
+            height={160}
             className="h-10 w-auto sm:h-12 lg:h-[52px]"
             priority
           />
