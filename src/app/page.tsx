@@ -33,7 +33,7 @@ export default function Home() {
                     Can Still Access Your Data — Even After You Remove the Apps
                   </h1>
 
-                  <p className="max-w-prose text-base leading-relaxed text-white/70 sm:text-lg md:text-xl">
+                  <p className="max-w-xl text-base leading-relaxed text-white/70 sm:text-lg sm:leading-[1.75] md:text-xl">
                     Third-party apps can quietly create{" "}
                     <span className="font-semibold bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                       permission sprawl
@@ -51,8 +51,8 @@ export default function Home() {
                   </CalendlyScheduleButton>
                 </div>
 
-                <ul className="space-y-2.5 text-sm text-slate-300/90 sm:space-y-3 sm:text-base">
-                  <li className="flex items-start gap-2">
+                <ul className="space-y-3 text-sm text-slate-300/90 sm:space-y-3.5 sm:text-base">
+                  <li className="flex items-start gap-2.5">
                     <span
                       className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                       aria-hidden
@@ -61,7 +61,7 @@ export default function Home() {
                     </span>
                     <span>20-minute guided review</span>
                   </li>
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start gap-2.5">
                     <span
                       className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                       aria-hidden
@@ -72,7 +72,7 @@ export default function Home() {
                       Read-only analysis (no changes without approval)
                     </span>
                   </li>
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start gap-2.5">
                     <span
                       className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-xs leading-none text-transparent"
                       aria-hidden
@@ -108,6 +108,7 @@ export default function Home() {
               ariaLabel="Go to Why It Matters"
               position="higher"
               mode="fixed"
+              bottomOverrideClassName="bottom-4 sm:bottom-5 lg:bottom-6"
             />
           </section>
         </SiteContainer>

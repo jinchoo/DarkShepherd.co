@@ -25,8 +25,8 @@ export default function WhatWeCheckPage() {
             </SmoothLink>
           </InternalBackLinkRow>
 
-          <div className="flex w-full flex-col gap-12 md:gap-16 lg:gap-20">
-            <div className="flex w-full flex-col items-center gap-6 text-center sm:gap-8 md:gap-10">
+          <div className="flex w-full flex-col gap-10 sm:gap-12 md:gap-14 lg:gap-16">
+            <div className="flex w-full flex-col items-center gap-5 text-center sm:gap-7 md:gap-8">
               <p>
                 <span
                   className="inline-block text-xl font-semibold uppercase tracking-[0.22em] sm:text-2xl md:text-3xl md:tracking-[0.28em]"
@@ -50,47 +50,47 @@ export default function WhatWeCheckPage() {
                   store&apos;s data
                 </span>
               </h1>
-              <p className="mx-auto max-w-3xl text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.7] md:text-xl">
+              <p className="mx-auto max-w-3xl text-base leading-relaxed text-white/72 sm:text-lg sm:leading-[1.75] md:text-xl">
                 We analyze where app access creates unnecessary risk across your store.
               </p>
             </div>
 
-            <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:gap-10 xl:gap-12">
-              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-6 py-7 text-left backdrop-blur-sm sm:px-8 sm:py-9 lg:px-10 lg:py-10">
-                <h2 className="text-xl font-semibold sm:text-2xl lg:text-[1.35rem] bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+            <div className="grid w-full grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 md:gap-7 lg:gap-8 xl:gap-10">
+              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-5 py-6 text-left backdrop-blur-sm sm:px-7 sm:py-8 lg:px-9 lg:py-9">
+                <h2 className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl lg:text-[1.35rem]">
                   App Permissions &amp; Data Access
                 </h2>
-                <p className="mt-5 text-sm leading-relaxed text-white/70 sm:mt-6 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
+                <p className="mt-4 text-sm leading-relaxed text-white/70 sm:mt-5 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
                   We identify what each app can access, including customer data, order
                   history, and store settings.
                 </p>
               </div>
 
-              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-6 py-7 text-left backdrop-blur-sm sm:px-8 sm:py-9 lg:px-10 lg:py-10">
-                <h2 className="text-xl font-semibold sm:text-2xl lg:text-[1.35rem] bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-5 py-6 text-left backdrop-blur-sm sm:px-7 sm:py-8 lg:px-9 lg:py-9">
+                <h2 className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl lg:text-[1.35rem]">
                   Unused &amp; Overprivileged Apps
                 </h2>
-                <p className="mt-5 text-sm leading-relaxed text-white/70 sm:mt-6 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
+                <p className="mt-4 text-sm leading-relaxed text-white/70 sm:mt-5 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
                   We flag apps that are no longer in use or have more access than
                   necessary.
                 </p>
               </div>
 
-              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-6 py-7 text-left backdrop-blur-sm sm:px-8 sm:py-9 lg:px-10 lg:py-10">
-                <h2 className="text-xl font-semibold sm:text-2xl lg:text-[1.35rem] bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-5 py-6 text-left backdrop-blur-sm sm:px-7 sm:py-8 lg:px-9 lg:py-9">
+                <h2 className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl lg:text-[1.35rem]">
                   Sensitive Data Exposure
                 </h2>
-                <p className="mt-5 text-sm leading-relaxed text-white/70 sm:mt-6 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
+                <p className="mt-4 text-sm leading-relaxed text-white/70 sm:mt-5 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
                   We highlight apps with access to sensitive data that could increase risk
                   if misused or compromised.
                 </p>
               </div>
 
-              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-6 py-7 text-left backdrop-blur-sm sm:px-8 sm:py-9 lg:px-10 lg:py-10">
-                <h2 className="text-xl font-semibold sm:text-2xl lg:text-[1.35rem] bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+              <div className="min-h-0 rounded-3xl border border-white/15 bg-white/[0.05] px-5 py-6 text-left backdrop-blur-sm sm:px-7 sm:py-8 lg:px-9 lg:py-9">
+                <h2 className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl lg:text-[1.35rem]">
                   App Overlap &amp; Redundancy
                 </h2>
-                <p className="mt-5 text-sm leading-relaxed text-white/70 sm:mt-6 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
+                <p className="mt-4 text-sm leading-relaxed text-white/70 sm:mt-5 sm:text-base sm:leading-[1.7] lg:text-[1.05rem]">
                   We uncover overlapping apps that duplicate functionality and expand your
                   attack surface.
                 </p>
@@ -99,7 +99,13 @@ export default function WhatWeCheckPage() {
           </div>
         </InternalPageShell>
 
-        <PawScrollButton href="/how-it-works" ariaLabel="Go to How it Works" position="higher" mode="fixed" />
+        <PawScrollButton
+          href="/how-it-works"
+          ariaLabel="Go to How it Works"
+          position="higher"
+          mode="fixed"
+          bottomOverrideClassName="bottom-4 sm:bottom-5 lg:bottom-6"
+        />
       </SiteMain>
     </div>
   );

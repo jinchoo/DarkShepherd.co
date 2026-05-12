@@ -91,8 +91,8 @@ export default function FAQPage() {
             </SmoothLink>
           </InternalBackLinkRow>
 
-          <div className="flex w-full flex-col gap-10 md:gap-12 lg:gap-14">
-            <div className="text-center">
+          <div className="flex w-full flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-14">
+            <div className="mx-auto max-w-2xl text-center">
               <p>
                 <span
                   className="inline-block text-balance text-xl font-semibold uppercase tracking-[0.18em] sm:text-2xl md:text-3xl md:tracking-[0.24em]"
@@ -107,20 +107,20 @@ export default function FAQPage() {
               {faqs.map((item) => (
                 <details
                   key={item.question}
-                  className="group rounded-2xl border border-white/12 bg-white/[0.03] px-4 py-3 text-left backdrop-blur-sm sm:px-6 sm:py-4 md:px-7"
+                  className="group rounded-2xl border border-white/12 bg-white/[0.03] px-4 py-4 text-left backdrop-blur-sm sm:px-6 sm:py-5 md:px-7"
                 >
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-3 text-base font-semibold sm:text-[17px] [&::-webkit-details-marker]:hidden">
                     <span className="min-w-0 flex-1 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent">
                       {item.question}
                     </span>
                     <span
-                      className="shrink-0 text-amber-300 transition group-open:rotate-180"
+                      className="mt-0.5 shrink-0 text-amber-300 transition group-open:rotate-180"
                       aria-hidden
                     >
                       +
                     </span>
                   </summary>
-                  <div className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">
+                  <div className="mt-3.5 text-sm leading-relaxed text-white/75 sm:text-base sm:leading-[1.7]">
                     {item.answer}
                   </div>
                 </details>
