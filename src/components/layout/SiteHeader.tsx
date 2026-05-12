@@ -30,18 +30,19 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/10 bg-[#050816]/80 backdrop-blur-md">
-      <SiteContainer className="relative flex min-h-[4.25rem] items-center justify-between gap-3 py-2.5 sm:min-h-[4.75rem] sm:gap-5 sm:py-3">
+    <>
+    <header className="fixed inset-x-0 top-0 z-30 border-b border-white/10 bg-[#050816]/80 backdrop-blur-md">
+      <SiteContainer className="relative flex min-h-[4rem] items-center justify-between gap-3 py-2 sm:min-h-[4.5rem] sm:gap-4">
         <Link
           href="/"
           className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3"
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/darkshepherd_logo1_cropped.png"
+            src="/darkshepherd-nav-logo.png"
             alt="Dark Shepherd logo"
-            width={120}
-            height={120}
+            width={144}
+            height={160}
             className="h-10 w-auto sm:h-12 lg:h-[52px]"
             priority
           />
@@ -113,5 +114,8 @@ export function SiteHeader() {
         </div>
       ) : null}
     </header>
+    {/* Reserves space so page content does not sit under the fixed header */}
+    <div className="h-16 shrink-0 sm:h-[4.5rem]" aria-hidden />
+    </>
   );
 }
