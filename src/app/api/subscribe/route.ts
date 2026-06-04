@@ -4,18 +4,6 @@ export const runtime = "nodejs";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Temporary diagnostic: reports only whether the env vars are present (booleans).
-// Never returns the secret values. Remove after confirming configuration.
-export async function GET() {
-  return NextResponse.json({
-    hasApiKey: Boolean(process.env.BEEHIIV_API_KEY),
-    apiKeyLength: process.env.BEEHIIV_API_KEY?.length ?? 0,
-    hasPublicationId: Boolean(process.env.BEEHIIV_PUBLICATION_ID),
-    publicationIdPrefix:
-      process.env.BEEHIIV_PUBLICATION_ID?.slice(0, 4) ?? null,
-  });
-}
-
 export async function POST(request: Request) {
   const apiKey = process.env.BEEHIIV_API_KEY;
   const publicationId = process.env.BEEHIIV_PUBLICATION_ID;
