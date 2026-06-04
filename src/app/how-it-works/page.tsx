@@ -5,6 +5,7 @@ import {
   InternalPageShell,
 } from "@/components/layout/InternalPageShell";
 import { SiteBackground } from "@/components/layout/SiteBackground";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteMain } from "@/components/layout/SiteMain";
 import { marketingEyebrowStyle, marketingShopifyAccentStyle } from "@/lib/marketing-styles";
@@ -123,10 +124,13 @@ export default function HowItWorksPage() {
           <PawScrollButton
             href="/pricing"
             ariaLabel="Go to Pricing"
-            visibilityMode="always"
+            position="higher"
+            mode="fixed"
           />
         </SiteMain>
       </div>
+
+      <SiteFooter />
     </div>
   );
 }

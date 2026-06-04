@@ -6,6 +6,7 @@ import {
   InternalPageShell,
 } from "@/components/layout/InternalPageShell";
 import { SiteBackground } from "@/components/layout/SiteBackground";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteMain } from "@/components/layout/SiteMain";
 import { marketingEyebrowStyle } from "@/lib/marketing-styles";
@@ -136,6 +137,8 @@ export default function PricingPage() {
 
         <PawScrollButton href="/faq" ariaLabel="Go to FAQ" visibilityMode="always" />
       </SiteMain>
+
+      <SiteFooter />
     </div>
   );
 }

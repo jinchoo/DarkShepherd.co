@@ -6,6 +6,7 @@ import {
   Space_Grotesk,
 } from "next/font/google";
 import "./globals.css";
+import { CookieConsent } from "@/components/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +70,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${spaceGrotesk.variable} flex min-h-screen flex-col antialiased`}
       >
         <main className="flex-1">{children}</main>
+        <CookieConsent />
       </body>
     </html>
   );

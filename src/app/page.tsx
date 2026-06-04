@@ -3,6 +3,7 @@ import { PawScrollButton } from "@/components/PawScrollButton";
 import { CalendlyScheduleButton } from "@/components/CalendlyScheduleButton";
 import { SiteBackground } from "@/components/layout/SiteBackground";
 import { SiteContainer } from "@/components/layout/SiteContainer";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 
 export default function Home() {
@@ -113,6 +114,8 @@ export default function Home() {
           </section>
         </SiteContainer>
       </div>
+
+      <SiteFooter />
     </div>
   );
 }

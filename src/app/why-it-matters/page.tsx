@@ -5,6 +5,7 @@ import {
   InternalPageShell,
 } from "@/components/layout/InternalPageShell";
 import { SiteBackground } from "@/components/layout/SiteBackground";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteMain } from "@/components/layout/SiteMain";
 import { marketingEyebrowStyle } from "@/lib/marketing-styles";
@@ -103,6 +104,8 @@ export default function WhyItMattersPage() {
           bottomOverrideClassName="bottom-4 sm:bottom-5 lg:bottom-6"
         />
       </SiteMain>
+
+      <SiteFooter />
     </div>
   );
 }
