@@ -174,9 +174,9 @@ export function SiteFooter() {
             </div>
 
             <p className="max-w-sm text-sm leading-relaxed text-slate-300/80">
-              Independent Shopify security + systems visibility for modern
+              Independent Shopify security +
               <br />
-              ecommerce brands.
+              systems visibility for modern ecommerce brands.
             </p>
 
             <div className="mt-2 sm:mt-3">
