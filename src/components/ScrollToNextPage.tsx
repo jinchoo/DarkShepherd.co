@@ -50,7 +50,7 @@ export function ScrollToNextPage({
       let bestRange = best.height - best.client;
       for (const c of candidates) {
         const range = c.height - c.client;
-        if (range > bestRange) {
+        if (range > bestRange || (range === bestRange && c.top > best.top)) {
           bestRange = range;
           best = c;
         }

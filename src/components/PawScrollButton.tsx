@@ -36,14 +36,13 @@ export function PawScrollButton({
   }, []);
 
   React.useEffect(() => {
-    const updateVisibility = () => {
+    const scrollMetrics = () => {
       const doc = document.documentElement;
       const body = document.body;
 
-      // The actual scroll container varies: it can be the window/documentElement,
-      // or `body` (e.g. when `html, body { height: 100%; overflow-x: hidden }`
-      // turns body into the scroller). Evaluate all candidates and use whichever
-      // is genuinely scrollable so the bottom trigger fires reliably.
+      // Prefer the element that actually has scroll range. On some layouts body
+      // overflows while documentElement reports viewport height only — in that
+      // case body.scrollTop is the real position.
       const candidates = [
         {
           top: window.scrollY || 0,
@@ -58,41 +57,50 @@ export function PawScrollButton({
       let bestRange = best.height - best.client;
       for (const c of candidates) {
         const range = c.height - c.client;
-        if (range > bestRange) {
+        // Prefer a larger range; if tied, prefer the one that has already scrolled.
+        if (range > bestRange || (range === bestRange && c.top > best.top)) {
           bestRange = range;
           best = c;
         }
       }
 
-      const remaining = best.height - best.top - best.client;
-      const isScrollable = bestRange > 4;
-      // Require real downward scroll so short pages (remaining already within
-      // threshold at the top) don't show the paw on arrival.
-      const hasScrolledDown = best.top > 24;
+      return { ...best, range: bestRange };
+    };
+
+    const updateVisibility = () => {
+      const { top, height, client, range } = scrollMetrics();
+      const remaining = height - top - client;
+      const isScrollable = range > 4;
+      // Require real downward scroll so short pages don't show the paw on arrival.
+      const hasScrolledDown = top > 24;
       const nearBottom = remaining <= NEAR_BOTTOM_THRESHOLD;
 
       setIsVisible(isScrollable && hasScrolledDown && nearBottom);
     };
 
     updateVisibility();
-    // Re-check after layout/images settle so a short first paint doesn't stick.
     const raf = window.requestAnimationFrame(updateVisibility);
-    // Capture phase so scroll events from inner scrollers (e.g. body) are caught,
-    // since scroll events do not bubble.
-    window.addEventListener("scroll", updateVisibility, {
-      passive: true,
-      capture: true,
-    });
+
+    // Scroll does not bubble — listen on window (capture) and on both common
+    // scroll containers so body-as-scroller layouts still update.
+    const scrollOpts: AddEventListenerOptions = { passive: true, capture: true };
+    window.addEventListener("scroll", updateVisibility, scrollOpts);
+    document.documentElement.addEventListener("scroll", updateVisibility, scrollOpts);
+    document.body.addEventListener("scroll", updateVisibility, scrollOpts);
     window.addEventListener("resize", updateVisibility);
+
     const resizeObserver =
       typeof ResizeObserver !== "undefined"
         ? new ResizeObserver(updateVisibility)
         : null;
     resizeObserver?.observe(document.documentElement);
+    resizeObserver?.observe(document.body);
 
     return () => {
       window.cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", updateVisibility, { capture: true });
+      window.removeEventListener("scroll", updateVisibility, scrollOpts);
+      document.documentElement.removeEventListener("scroll", updateVisibility, scrollOpts);
+      document.body.removeEventListener("scroll", updateVisibility, scrollOpts);
       window.removeEventListener("resize", updateVisibility);
       resizeObserver?.disconnect();
     };

@@ -22,7 +22,10 @@
 
 html,
 body {
-  height: 100%;
+  /* min-height (not height) so document can grow and window scrolling works.
+     height: 100% locked the document to the viewport and trapped overflow on body,
+     which broke the paw / scroll-to-next detection on shorter pages. */
+  min-height: 100%;
   overflow-x: hidden;
 }
 
@@ -51,7 +54,7 @@ body {
 
 /* Next.js app root */
 #__next {
-  height: 100%;
+  min-height: 100%;
 }
 
 .hero-overlay {
