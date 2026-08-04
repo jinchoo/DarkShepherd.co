@@ -19,7 +19,6 @@ const navItems = [
   { href: "/integrations", label: "Integrations" },
   { href: "/pricing", label: "Pricing" },
   { href: "/faq", label: "FAQ" },
-  { href: "/about", label: "About" },
 ] as const;
 
 export function SiteHeader() {

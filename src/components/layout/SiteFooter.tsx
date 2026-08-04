@@ -36,12 +36,12 @@ const footerColumns: FooterColumn[] = [
     ],
   },
   {
-    heading: "Services",
+    heading: "Products",
     links: [
-      { label: "Shopify\u00A0Security\u00A0Review", href: "/what-we-check" },
-      { label: "App Permission Audit", href: "/what-we-check" },
-      { label: "Revenue\u00A0Integrity\u00A0Review", href: "/what-we-check" },
-      { label: "Systems Visibility", href: "/what-we-check" },
+      { label: "Overview", href: "/" },
+      { label: "What We Check", href: "/product" },
+      { label: "Shopify Integration", href: "/integrations" },
+      { label: "Join the Beta", href: "/" },
     ],
   },
 ];
@@ -76,7 +76,10 @@ const socialIcons: Record<SocialLink["icon"], ReactNode> = {
           <stop offset="100%" stopColor="#4f5bd5" />
         </linearGradient>
       </defs>
-      <path fill="url(#ig-gradient)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.94c-3.14 0-3.51.01-4.75.07-.99.04-1.53.21-1.89.35-.47.18-.81.4-1.17.76-.36.36-.58.7-.76 1.17-.14.36-.31.9-.35 1.89-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.04.99.21 1.53.35 1.89.18.47.4.81.76 1.17.36.36.7.58 1.17.76.36.14.9.31 1.89.35 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c.99-.04 1.53-.21 1.89-.35.47-.18.81-.4 1.17-.76.36-.36.58-.7.76-1.17.14-.36.31-.9.35-1.89.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.04-.99-.21-1.53-.35-1.89a3.15 3.15 0 0 0-.76-1.17 3.15 3.15 0 0 0-1.17-.76c-.36-.14-.9-.31-1.89-.35-1.24-.06-1.61-.07-4.75-.07zm0 3.3a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 7.59a2.99 2.99 0 1 0 0-5.98 2.99 2.99 0 0 0 0 5.98zm5.85-7.81a1.08 1.08 0 1 1-2.15 0 1.08 1.08 0 0 1 2.15 0z" />
+      <path
+        fill="url(#ig-gradient)"
+        d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.94c-3.14 0-3.51.01-4.75.07-.99.04-1.53.21-1.89.35-.47.18-.81.4-1.17.76-.36.36-.58.7-.76 1.17-.14.36-.31.9-.35 1.89-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.04.99.21 1.53.35 1.89.18.47.4.81.76 1.17.36.36.7.58 1.17.76.36.14.9.31 1.89.35 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c.99-.04 1.53-.21 1.89-.35.47-.18.81-.4 1.17-.76.36-.36.58-.7.76-1.17.14-.36.31-.9.35-1.89.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.04-.99-.21-1.53-.35-1.89a3.15 3.15 0 0 0-.76-1.17 3.15 3.15 0 0 0-1.17-.76c-.36-.14-.9-.31-1.89-.35-1.24-.06-1.61-.07-4.75-.07zm0 3.3a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 7.59a2.99 2.99 0 1 0 0-5.98 2.99 2.99 0 0 0 0 5.98zm5.85-7.81a1.08 1.08 0 1 1-2.15 0 1.08 1.08 0 0 1 2.15 0z"
+      />
     </svg>
   ),
 };
@@ -167,9 +170,7 @@ export function SiteFooter() {
                 <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-lg font-semibold tracking-[0.06em] text-transparent">
                   DarkShepherd
                 </span>
-                <span className="text-xs text-slate-400">
-                  Protecting One Pack at a Time.
-                </span>
+                <span className="text-xs text-slate-400">Protecting One Pack at a Time.</span>
               </div>
             </div>
 
@@ -185,10 +186,7 @@ export function SiteFooter() {
           </div>
 
           {/* CENTER — Navigation */}
-          <nav
-            className="grid grid-cols-2 gap-8 lg:col-span-4"
-            aria-label="Footer"
-          >
+          <nav className="grid grid-cols-2 gap-8 lg:col-span-4" aria-label="Footer">
             {footerColumns.map((column) => (
               <div key={column.heading} className="flex flex-col gap-3">
                 <h3 className={headingClass}>{column.heading}</h3>
@@ -205,19 +203,16 @@ export function SiteFooter() {
 
           {/* RIGHT — Dispatch signup card */}
           <div className="lg:col-span-4 lg:col-start-9">
-            <div className="flex flex-col items-center gap-4 rounded-2xl border border-amber-300/30 bg-white/[0.03] px-6 pb-6 pt-10 text-center shadow-[0_12px_40px_rgba(0,0,0,0.35)] sm:pt-12">
+            <div className="flex flex-col items-center gap-4 rounded-2xl border border-amber-300/30 bg-white/[0.03] px-6 pt-10 pb-6 text-center shadow-[0_12px_40px_rgba(0,0,0,0.35)] sm:pt-12">
               <PawTrail />
 
               <div className="flex flex-col gap-1">
                 <p className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-2xl font-semibold text-transparent">
                   Follow the Pack
                 </p>
-                <p className="text-base font-semibold text-slate-100">
-                  Join DarkShepherd Dispatch
-                </p>
+                <p className="text-base font-semibold text-slate-100">Join DarkShepherd Dispatch</p>
                 <p className="text-sm leading-relaxed text-slate-300/80">
-                  Weekly security insights, investigations, and ecommerce
-                  operational intelligence.
+                  Weekly security insights, investigations, and ecommerce operational intelligence.
                 </p>
               </div>
 
