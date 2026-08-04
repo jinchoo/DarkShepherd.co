@@ -8,7 +8,7 @@ const variantMaxWidth: Record<InternalPageVariant, string> = {
   narrow: "max-w-[760px]",
   /** FAQ, mixed content */
   medium: "max-w-[980px]",
-  /** Card / grid pages: What We Check, How It Works */
+  /** Card / grid pages: What We Check */
   wide: "max-w-[1180px]",
 };
 

@@ -26,7 +26,7 @@ const footerColumns: FooterColumn[] = [
     heading: "Company",
     links: [
       { label: "Home", href: "/" },
-      { label: "About", href: "/why-it-matters" },
+      { label: "About", href: "/product" },
       { label: "Contact", href: "mailto:jin@darkshepherd.co", external: true },
       {
         label: "Schedule Review",

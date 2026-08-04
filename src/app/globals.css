@@ -74,39 +74,51 @@ body {
 .paw-pulse {
   animation: paw-pulse 2.5s ease-in-out infinite;
 }
+
+@keyframes paw-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+.paw-bounce {
+  animation: paw-bounce 1.1s ease-in-out infinite;
+}
 .paw-pulse-delay-1 { animation-delay: 0.4s; }
 .paw-pulse-delay-2 { animation-delay: 0.8s; }
 .paw-pulse-delay-3 { animation-delay: 1.2s; }
 .paw-pulse-delay-4 { animation-delay: 1.6s; }
 .paw-pulse-delay-5 { animation-delay: 2s; }
 
-/* Smooth scroll-like page transition (slide up) when using View Transitions API */
+/* Smooth crossfade page transition when using View Transitions API */
 @supports (view-transition-name: none) {
-  @keyframes view-transition-slide-out-up {
+  @keyframes view-transition-fade-out {
     from {
-      transform: translateY(0);
       opacity: 1;
     }
     to {
-      transform: translateY(-16%);
       opacity: 0;
     }
   }
-  @keyframes view-transition-slide-in-up {
+  @keyframes view-transition-fade-in-up {
     from {
-      transform: translateY(16%);
+      transform: translateY(20px);
       opacity: 0;
     }
     to {
       transform: translateY(0);
       opacity: 1;
     }
+  }
+  /* Let old and new overlap and crossfade instead of the default hard swap. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    mix-blend-mode: normal;
   }
   ::view-transition-old(root) {
-    animation: view-transition-slide-out-up 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation: view-transition-fade-out 0.85s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
   ::view-transition-new(root) {
-    animation: view-transition-slide-in-up 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation: view-transition-fade-in-up 1s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
 

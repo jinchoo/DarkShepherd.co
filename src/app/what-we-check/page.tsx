@@ -1,4 +1,5 @@
 import { PawScrollButton } from "@/components/PawScrollButton";
+import { ScrollToNextPage } from "@/components/ScrollToNextPage";
 import { SmoothLink } from "@/components/SmoothLink";
 import {
   InternalBackLinkRow,
@@ -19,10 +20,10 @@ export default function WhatWeCheckPage() {
         <InternalPageShell variant="wide">
           <InternalBackLinkRow>
             <SmoothLink
-              href="/why-it-matters"
+              href="/product"
               className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
             >
-              ↑ Back to Why It Matters
+              ↑ Back to Product
             </SmoothLink>
           </InternalBackLinkRow>
 
@@ -101,12 +102,13 @@ export default function WhatWeCheckPage() {
         </InternalPageShell>
 
         <PawScrollButton
-          href="/how-it-works"
-          ariaLabel="Go to How it Works"
+          href="/pricing"
+          ariaLabel="Go to Pricing"
           position="higher"
           mode="fixed"
           bottomOverrideClassName="bottom-4 sm:bottom-5 lg:bottom-6"
         />
+        <ScrollToNextPage prevHref="/product" nextHref="/pricing" />
       </SiteMain>
 
       <SiteFooter />

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
+import { navigateWithViewTransition } from "@/lib/viewTransition";
 
 type SmoothLinkProps = {
   href: string;
@@ -13,20 +14,10 @@ export function SmoothLink({ href, className, children }: SmoothLinkProps) {
   const router = useRouter();
 
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    // Let modified clicks (new tab, etc.) behave natively.
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    const navigate = () => {
-      // Prevent preserved scroll position from making internal pages land low.
-      window.scrollTo(0, 0);
-      router.push(href);
-    };
-
-    if (typeof document !== "undefined" && "startViewTransition" in document) {
-      (document as Document & { startViewTransition: (cb: () => void | Promise<void>) => void }).startViewTransition(
-        navigate,
-      );
-    } else {
-      navigate();
-    }
+    navigateWithViewTransition(router, href);
   }
 
   return (

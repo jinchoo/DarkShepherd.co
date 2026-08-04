@@ -1,9 +1,6 @@
 import type { ReactNode } from "react";
-import { SmoothLink } from "@/components/SmoothLink";
-import {
-  InternalBackLinkRow,
-  InternalPageShell,
-} from "@/components/layout/InternalPageShell";
+import { ScrollToNextPage } from "@/components/ScrollToNextPage";
+import { InternalPageShell } from "@/components/layout/InternalPageShell";
 import { SiteBackground } from "@/components/layout/SiteBackground";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -80,18 +77,6 @@ export default function FAQPage() {
       <SiteHeader />
       <SiteMain internal>
         <InternalPageShell variant="medium">
-          <InternalBackLinkRow>
-            <SmoothLink
-              href="/pricing"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300/85 transition hover:bg-gradient-to-r hover:from-amber-200 hover:via-amber-400 hover:to-amber-500 hover:bg-clip-text hover:text-transparent"
-            >
-              <span aria-hidden className="text-base">
-                ↑
-              </span>
-              <span>Back to Pricing</span>
-            </SmoothLink>
-          </InternalBackLinkRow>
-
           <div className="flex w-full flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-14">
             <div className="mx-auto max-w-2xl text-center">
               <p>
@@ -129,6 +114,7 @@ export default function FAQPage() {
             </div>
           </div>
         </InternalPageShell>
+        <ScrollToNextPage prevHref="/pricing" />
       </SiteMain>
 
       <SiteFooter />
