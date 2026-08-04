@@ -25,10 +25,11 @@ export function PawScrollButton({
   ariaLabel = "Go to Product",
   position = "higher",
   mode = "fixed",
-  bottomOverrideClassName,
+  bottomOverrideClassName: _bottomOverrideClassName,
 }: PawScrollButtonProps) {
   const [isVisible, setIsVisible] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
+  const [bottomPx, setBottomPx] = React.useState(16);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -40,9 +41,6 @@ export function PawScrollButton({
       const doc = document.documentElement;
       const body = document.body;
 
-      // Prefer the element that actually has scroll range. On some layouts body
-      // overflows while documentElement reports viewport height only — in that
-      // case body.scrollTop is the real position.
       const candidates = [
         {
           top: window.scrollY || 0,
@@ -57,7 +55,6 @@ export function PawScrollButton({
       let bestRange = best.height - best.client;
       for (const c of candidates) {
         const range = c.height - c.client;
-        // Prefer a larger range; if tied, prefer the one that has already scrolled.
         if (range > bestRange || (range === bestRange && c.top > best.top)) {
           bestRange = range;
           best = c;
@@ -67,22 +64,38 @@ export function PawScrollButton({
       return { ...best, range: bestRange };
     };
 
+    const updateBottomOffset = () => {
+      // Cookie banner sits at z-60 over the bottom; lift the paw above it.
+      const cookie = document.querySelector<HTMLElement>('[aria-label="Cookie consent"]');
+      const cookieHeight = cookie ? cookie.getBoundingClientRect().height : 0;
+      const base =
+        position === "lowest"
+          ? 32
+          : position === "lower"
+            ? 24
+            : position === "higher"
+              ? 16
+              : 24;
+      // Call sites may pass bottomOverrideClassName for intent; keep a sensible
+      // minimum clearance either way.
+      setBottomPx(cookieHeight > 0 ? Math.ceil(cookieHeight + 12) : base);
+    };
+
     const updateVisibility = () => {
       const { top, height, client, range } = scrollMetrics();
       const remaining = height - top - client;
       const isScrollable = range > 4;
-      // Require real downward scroll so short pages don't show the paw on arrival.
       const hasScrolledDown = top > 24;
       const nearBottom = remaining <= NEAR_BOTTOM_THRESHOLD;
 
-      setIsVisible(isScrollable && hasScrolledDown && nearBottom);
+      // If the page can't scroll, the bottom is already in view — show the paw.
+      setIsVisible(!isScrollable || (hasScrolledDown && nearBottom));
+      updateBottomOffset();
     };
 
     updateVisibility();
     const raf = window.requestAnimationFrame(updateVisibility);
 
-    // Scroll does not bubble — listen on window (capture) and on both common
-    // scroll containers so body-as-scroller layouts still update.
     const scrollOpts: AddEventListenerOptions = { passive: true, capture: true };
     window.addEventListener("scroll", updateVisibility, scrollOpts);
     document.documentElement.addEventListener("scroll", updateVisibility, scrollOpts);
@@ -95,6 +108,15 @@ export function PawScrollButton({
         : null;
     resizeObserver?.observe(document.documentElement);
     resizeObserver?.observe(document.body);
+    const cookie = document.querySelector('[aria-label="Cookie consent"]');
+    if (cookie) resizeObserver?.observe(cookie);
+
+    // Cookie banner mounts/unmounts after consent — watch for it.
+    const mutationObserver =
+      typeof MutationObserver !== "undefined"
+        ? new MutationObserver(updateVisibility)
+        : null;
+    mutationObserver?.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       window.cancelAnimationFrame(raf);
@@ -103,26 +125,14 @@ export function PawScrollButton({
       document.body.removeEventListener("scroll", updateVisibility, scrollOpts);
       window.removeEventListener("resize", updateVisibility);
       resizeObserver?.disconnect();
+      mutationObserver?.disconnect();
     };
-  }, []);
-
-  const bottomClass =
-    bottomOverrideClassName ??
-    // Use positive offsets so the paw is fully visible even when parents clip overflow.
-    (position === "lowest"
-      ? "bottom-8"
-      : position === "lower"
-      ? "bottom-6"
-      : position === "higher"
-      ? "bottom-[12px]"
-      : "bottom-6");
+  }, [position]);
 
   const positionClass = mode === "fixed" ? "fixed" : "absolute";
 
   function handleClick(e: React.MouseEvent) {
-    // Let modified clicks (new tab, etc.) behave natively; <Link> handles nav.
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    // Navigate with the site-wide smooth page transition.
     e.preventDefault();
     navigateWithViewTransition(router, href);
   }
@@ -134,9 +144,10 @@ export function PawScrollButton({
       className={[
         isVisible ? "paw-bounce opacity-100" : "pointer-events-none opacity-0",
         positionClass,
-        bottomClass,
-        "left-1/2 z-50 flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full transition-opacity duration-300",
+        // z-[70] sits above the cookie banner (z-60).
+        "left-1/2 z-[70] flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full transition-opacity duration-300",
       ].join(" ")}
+      style={{ bottom: bottomPx }}
       aria-hidden={!isVisible}
       aria-label={ariaLabel}
       tabIndex={isVisible ? 0 : -1}
@@ -169,8 +180,6 @@ export function PawScrollButton({
     </Link>
   );
 
-  // Render into document.body so the fixed paw escapes page stacking contexts
-  // (e.g. the footer) and stays clickable above all content.
   if (!mounted) return null;
   return createPortal(paw, document.body);
 }
