@@ -1,0 +1,1 @@
+-- Initial migration script for Supabase schema

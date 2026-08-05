@@ -9,8 +9,10 @@ type ScrollToNextPageProps = {
   nextHref?: string;
   /** Route to go back to when the user scrolls up past the top. */
   prevHref?: string;
-  /** How much extra scroll intent (px) is needed at an edge before navigating. */
+  /** Extra scroll intent (px) needed at the bottom before going to the next page. */
   threshold?: number;
+  /** Extra scroll intent (px) needed at the top before going to the previous page. */
+  upThreshold?: number;
 };
 
 /**
@@ -21,7 +23,9 @@ type ScrollToNextPageProps = {
 export function ScrollToNextPage({
   nextHref,
   prevHref,
-  threshold = 280,
+  threshold = 420,
+  // Scroll-up → previous page needs more intent so it doesn't feel too eager.
+  upThreshold = 900,
 }: ScrollToNextPageProps) {
   const router = useRouter();
   const navigated = useRef(false);
@@ -62,11 +66,14 @@ export function ScrollToNextPage({
       const m = metrics();
       return m.height - m.top - m.client <= 4;
     };
-    const atTop = () => metrics().top <= 4;
+    // Stricter top check so Lenis overshoot doesn't trigger prev-page too early.
+    const atTop = () => metrics().top <= 1;
 
     const go = (href: string) => {
       if (navigated.current) return;
       navigated.current = true;
+      downAccum.current = 0;
+      upAccum.current = 0;
       navigateWithViewTransition(router, href);
     };
 
@@ -85,8 +92,9 @@ export function ScrollToNextPage({
           upAccum.current = 0;
           return;
         }
-        upAccum.current += -e.deltaY;
-        if (upAccum.current >= threshold) go(prevHref);
+        // Dampen upward accumulation so prev-page nav feels slower / less twitchy.
+        upAccum.current += -e.deltaY * 0.55;
+        if (upAccum.current >= upThreshold) go(prevHref);
       }
     };
 
@@ -99,7 +107,7 @@ export function ScrollToNextPage({
       // Positive delta = finger up = scrolling down; negative = scrolling up.
       const delta = touchStartY.current - currentY;
       if (delta > 140 && nextHref && atBottom()) go(nextHref);
-      else if (delta < -140 && prevHref && atTop()) go(prevHref);
+      else if (delta < -260 && prevHref && atTop()) go(prevHref);
     };
 
     window.addEventListener("wheel", onWheel, { passive: true });
@@ -111,7 +119,7 @@ export function ScrollToNextPage({
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
     };
-  }, [nextHref, prevHref, router, threshold]);
+  }, [nextHref, prevHref, router, threshold, upThreshold]);
 
   return null;
 }

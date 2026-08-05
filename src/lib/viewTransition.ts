@@ -1,14 +1,15 @@
-type MinimalRouter = { push: (href: string) => void };
+type MinimalRouter = {
+  push: (href: string, options?: { scroll?: boolean }) => void;
+};
 
 /**
- * Navigate to `href` using the View Transitions API when available so the
- * site-wide slide-up page transition (see globals.css) plays. Falls back to a
- * plain push otherwise. Resets scroll so the destination renders at the top.
+ * Navigate with an optional view transition. Uses `scroll: false` so Next.js
+ * does not animate/jump the outgoing page; the destination is pinned to top
+ * by ScrollToTopOnRouteChange after the route mounts.
  */
 export function navigateWithViewTransition(router: MinimalRouter, href: string) {
   const navigate = () => {
-    window.scrollTo(0, 0);
-    router.push(href);
+    router.push(href, { scroll: false });
   };
 
   if (typeof document !== "undefined" && "startViewTransition" in document) {

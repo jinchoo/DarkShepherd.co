@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { CookieConsent } from "@/components/CookieConsent";
+import { ScrollToTopOnRouteChange } from "@/components/ScrollToTopOnRouteChange";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +70,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${spaceGrotesk.variable} flex min-h-screen flex-col antialiased`}
       >
+        <ScrollToTopOnRouteChange />
         <main className="flex-1">{children}</main>
         <CookieConsent />
       </body>

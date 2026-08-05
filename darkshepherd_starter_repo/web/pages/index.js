@@ -1,0 +1,1 @@
+export default function Home(){return(<div><h1>DarkShepherd.ai</h1><a href='/install'>Install on Shopify</a></div>)}

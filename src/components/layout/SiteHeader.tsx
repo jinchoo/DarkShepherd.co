@@ -15,6 +15,7 @@ const navLinkActiveTextClass =
   "bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-sm font-medium text-transparent sm:text-base";
 
 const navItems = [
+  { href: "/", label: "Home" },
   { href: "/product", label: "Product" },
   { href: "/integrations", label: "Integrations" },
   { href: "/pricing", label: "Pricing" },

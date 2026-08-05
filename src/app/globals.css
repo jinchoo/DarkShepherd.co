@@ -20,13 +20,20 @@
   }
 }
 
-html,
-body {
-  /* min-height (not height) so document can grow and window scrolling works.
-     height: 100% locked the document to the viewport and trapped overflow on body,
-     which broke the paw / scroll-to-next detection on shorter pages. */
+html {
+  /* Native scrolling only — no smooth-behavior lag, no dual overflow traps. */
   min-height: 100%;
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100%;
+  /* Keep overflow-x on body only; putting it on html+body can make wheel
+     scrolling feel delayed / hesitant on some browsers. */
   overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-space-grotesk), sans-serif;
 }
 
 /* Site-wide horizontal padding + max width (matches Tailwind max-w-[1280px]) */
@@ -40,16 +47,6 @@ body {
     padding-left: max(env(safe-area-inset-left), clamp(1rem, 4vw, 3rem));
     padding-right: max(env(safe-area-inset-right), clamp(1rem, 4vw, 3rem));
   }
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-space-grotesk), sans-serif;
 }
 
 /* Next.js app root */
@@ -92,7 +89,8 @@ body {
 .paw-pulse-delay-4 { animation-delay: 1.6s; }
 .paw-pulse-delay-5 { animation-delay: 2s; }
 
-/* Smooth crossfade page transition when using View Transitions API */
+/* Crossfade page transition — no vertical slide on the outgoing page
+   (that read as “jump to top” before the next page appeared). */
 @supports (view-transition-name: none) {
   @keyframes view-transition-fade-out {
     from {
@@ -102,26 +100,33 @@ body {
       opacity: 0;
     }
   }
-  @keyframes view-transition-fade-in-up {
+  @keyframes view-transition-fade-in {
     from {
-      transform: translateY(20px);
       opacity: 0;
     }
     to {
-      transform: translateY(0);
       opacity: 1;
     }
   }
-  /* Let old and new overlap and crossfade instead of the default hard swap. */
   ::view-transition-old(root),
   ::view-transition-new(root) {
     mix-blend-mode: normal;
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
   }
   ::view-transition-old(root) {
-    animation: view-transition-fade-out 0.85s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation-name: view-transition-fade-out;
   }
   ::view-transition-new(root) {
-    animation: view-transition-fade-in-up 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-name: view-transition-fade-in;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.01ms;
+    }
   }
 }
 

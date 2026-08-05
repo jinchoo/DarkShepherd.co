@@ -29,19 +29,18 @@ const footerColumns: FooterColumn[] = [
       { label: "About", href: "/product" },
       { label: "Contact", href: "mailto:jin@darkshepherd.co", external: true },
       {
-        label: "Schedule Review",
+        label: "Join the Beta",
         href: "https://calendly.com/jin-darkshepherd/30min",
         external: true,
       },
     ],
   },
   {
-    heading: "Products",
+    heading: "Explore DarkShepherd",
     links: [
-      { label: "Overview", href: "/" },
-      { label: "What We Check", href: "/product" },
-      { label: "Shopify Integration", href: "/integrations" },
-      { label: "Join the Beta", href: "/" },
+      { label: "Why it Matters", href: "/" },
+      { label: "What We Check", href: "/product#checks" },
+      { label: "How It Works", href: "/integrations" },
     ],
   },
 ];
@@ -236,8 +235,11 @@ export function SiteFooter() {
             <span className="h-px flex-1 bg-white/10" aria-hidden />
           </div>
 
-          <div className="flex flex-col gap-3 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
-            <span>© 2026 DarkShepherd. All rights reserved.</span>
+          <div className="-mt-6 flex flex-col gap-3 text-xs text-slate-400 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex flex-col gap-1">
+              <span>© 2026 DarkShepherd. All rights reserved.</span>
+              <span>A product of CodeCraftBrew LLC</span>
+            </div>
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <Link href="/privacy" className={linkClass}>
                 Privacy Policy
@@ -257,7 +259,6 @@ export function SiteFooter() {
               <span aria-hidden className="text-slate-600">
                 •
               </span>
-              <span>Independent Security Review Service</span>
             </div>
           </div>
         </div>

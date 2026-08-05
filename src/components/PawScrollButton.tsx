@@ -31,101 +31,59 @@ export function PawScrollButton({
   const [mounted, setMounted] = React.useState(false);
   const [bottomPx, setBottomPx] = React.useState(16);
   const router = useRouter();
+  const visibleRef = React.useRef(false);
+  const bottomRef = React.useRef(16);
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
   React.useEffect(() => {
-    const scrollMetrics = () => {
+    let ticking = false;
+
+    const baseBottom =
+      position === "lowest" ? 32 : position === "lower" ? 24 : position === "higher" ? 16 : 24;
+
+    const update = () => {
+      ticking = false;
+
       const doc = document.documentElement;
-      const body = document.body;
-
-      const candidates = [
-        {
-          top: window.scrollY || 0,
-          height: doc.scrollHeight,
-          client: window.innerHeight || doc.clientHeight,
-        },
-        { top: doc.scrollTop, height: doc.scrollHeight, client: doc.clientHeight },
-        { top: body.scrollTop, height: body.scrollHeight, client: body.clientHeight },
-      ];
-
-      let best = candidates[0];
-      let bestRange = best.height - best.client;
-      for (const c of candidates) {
-        const range = c.height - c.client;
-        if (range > bestRange || (range === bestRange && c.top > best.top)) {
-          bestRange = range;
-          best = c;
-        }
-      }
-
-      return { ...best, range: bestRange };
-    };
-
-    const updateBottomOffset = () => {
-      // Cookie banner sits at z-60 over the bottom; lift the paw above it.
-      const cookie = document.querySelector<HTMLElement>('[aria-label="Cookie consent"]');
-      const cookieHeight = cookie ? cookie.getBoundingClientRect().height : 0;
-      const base =
-        position === "lowest"
-          ? 32
-          : position === "lower"
-            ? 24
-            : position === "higher"
-              ? 16
-              : 24;
-      // Call sites may pass bottomOverrideClassName for intent; keep a sensible
-      // minimum clearance either way.
-      setBottomPx(cookieHeight > 0 ? Math.ceil(cookieHeight + 12) : base);
-    };
-
-    const updateVisibility = () => {
-      const { top, height, client, range } = scrollMetrics();
+      const top = window.scrollY || doc.scrollTop || 0;
+      const height = doc.scrollHeight;
+      const client = window.innerHeight || doc.clientHeight;
+      const range = height - client;
       const remaining = height - top - client;
       const isScrollable = range > 4;
-      const hasScrolledDown = top > 24;
-      const nearBottom = remaining <= NEAR_BOTTOM_THRESHOLD;
+      const nextVisible =
+        !isScrollable || (top > 24 && remaining <= NEAR_BOTTOM_THRESHOLD);
 
-      // If the page can't scroll, the bottom is already in view — show the paw.
-      setIsVisible(!isScrollable || (hasScrolledDown && nearBottom));
-      updateBottomOffset();
+      if (nextVisible !== visibleRef.current) {
+        visibleRef.current = nextVisible;
+        setIsVisible(nextVisible);
+      }
+
+      const cookie = document.querySelector<HTMLElement>('[aria-label="Cookie consent"]');
+      const cookieHeight = cookie ? cookie.getBoundingClientRect().height : 0;
+      const nextBottom = cookieHeight > 0 ? Math.ceil(cookieHeight + 12) : baseBottom;
+      if (nextBottom !== bottomRef.current) {
+        bottomRef.current = nextBottom;
+        setBottomPx(nextBottom);
+      }
     };
 
-    updateVisibility();
-    const raf = window.requestAnimationFrame(updateVisibility);
+    const onScrollOrResize = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
 
-    const scrollOpts: AddEventListenerOptions = { passive: true, capture: true };
-    window.addEventListener("scroll", updateVisibility, scrollOpts);
-    document.documentElement.addEventListener("scroll", updateVisibility, scrollOpts);
-    document.body.addEventListener("scroll", updateVisibility, scrollOpts);
-    window.addEventListener("resize", updateVisibility);
-
-    const resizeObserver =
-      typeof ResizeObserver !== "undefined"
-        ? new ResizeObserver(updateVisibility)
-        : null;
-    resizeObserver?.observe(document.documentElement);
-    resizeObserver?.observe(document.body);
-    const cookie = document.querySelector('[aria-label="Cookie consent"]');
-    if (cookie) resizeObserver?.observe(cookie);
-
-    // Cookie banner mounts/unmounts after consent — watch for it.
-    const mutationObserver =
-      typeof MutationObserver !== "undefined"
-        ? new MutationObserver(updateVisibility)
-        : null;
-    mutationObserver?.observe(document.body, { childList: true, subtree: true });
+    update();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
 
     return () => {
-      window.cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", updateVisibility, scrollOpts);
-      document.documentElement.removeEventListener("scroll", updateVisibility, scrollOpts);
-      document.body.removeEventListener("scroll", updateVisibility, scrollOpts);
-      window.removeEventListener("resize", updateVisibility);
-      resizeObserver?.disconnect();
-      mutationObserver?.disconnect();
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
     };
   }, [position]);
 
@@ -138,46 +96,58 @@ export function PawScrollButton({
   }
 
   const paw = (
-    <Link
-      href={href}
-      onClick={handleClick}
+    <div
       className={[
-        isVisible ? "paw-bounce opacity-100" : "pointer-events-none opacity-0",
+        isVisible ? "opacity-100" : "pointer-events-none opacity-0",
         positionClass,
         // z-[70] sits above the cookie banner (z-60).
-        "left-1/2 z-[70] flex h-14 w-14 -ml-[1.75rem] items-center justify-center rounded-full transition-opacity duration-300",
+        "left-1/2 z-[70] flex -translate-x-1/2 flex-col items-center transition-opacity duration-300",
       ].join(" ")}
       style={{ bottom: bottomPx }}
       aria-hidden={!isVisible}
-      aria-label={ariaLabel}
-      tabIndex={isVisible ? 0 : -1}
     >
-      <svg viewBox="0 0 225 225" className="h-9 w-9 shrink-0" aria-hidden>
-        <defs>
-          <linearGradient id="paw-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFD36A" />
-            <stop offset="50%" stopColor="#FFB200" />
-            <stop offset="100%" stopColor="#FFC857" />
-          </linearGradient>
-          <filter id="paw-invert">
-            <feColorMatrix
-              type="matrix"
-              values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"
-            />
-          </filter>
-          <mask id="paw-mask">
-            <image
-              href="/paw-print-button.png"
-              width={225}
-              height={225}
-              filter="url(#paw-invert)"
-              preserveAspectRatio="xMidYMid meet"
-            />
-          </mask>
-        </defs>
-        <rect width={225} height={225} fill="url(#paw-gold)" mask="url(#paw-mask)" />
-      </svg>
-    </Link>
+      <div className="translate-y-2">
+        <Link
+          href={href}
+          onClick={handleClick}
+          className={[
+            isVisible ? "paw-bounce" : "",
+            "flex h-14 w-14 items-center justify-center rounded-full",
+          ].join(" ")}
+          aria-label={ariaLabel}
+          tabIndex={isVisible ? 0 : -1}
+        >
+          <svg viewBox="0 0 225 225" className="h-9 w-9 shrink-0" aria-hidden>
+            <defs>
+              <linearGradient id="paw-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FFD36A" />
+                <stop offset="50%" stopColor="#FFB200" />
+                <stop offset="100%" stopColor="#FFC857" />
+              </linearGradient>
+              <filter id="paw-invert">
+                <feColorMatrix
+                  type="matrix"
+                  values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"
+                />
+              </filter>
+              <mask id="paw-mask">
+                <image
+                  href="/paw-print-button.png"
+                  width={225}
+                  height={225}
+                  filter="url(#paw-invert)"
+                  preserveAspectRatio="xMidYMid meet"
+                />
+              </mask>
+            </defs>
+            <rect width={225} height={225} fill="url(#paw-gold)" mask="url(#paw-mask)" />
+          </svg>
+        </Link>
+      </div>
+      <p className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-[11px] font-semibold tracking-[0.14em] text-transparent uppercase sm:text-xs">
+        Scroll to Explore
+      </p>
+    </div>
   );
 
   if (!mounted) return null;
