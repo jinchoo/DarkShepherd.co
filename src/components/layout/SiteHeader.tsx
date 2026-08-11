@@ -65,8 +65,13 @@ export function SiteHeader() {
             className="h-10 w-auto sm:h-12 lg:h-[52px]"
             priority
           />
-          <span className="truncate bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-sm font-semibold tracking-[0.06em] text-transparent sm:text-lg lg:text-xl">
-            DarkShepherd
+          <span className="flex min-w-0 flex-col">
+            <span className="truncate bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-sm font-semibold tracking-[0.06em] text-transparent sm:text-lg lg:text-xl">
+              DarkShepherd
+            </span>
+            <span className="truncate bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-[9px] font-medium tracking-[0.04em] text-transparent sm:text-[10px] lg:text-[11px]">
+              Protecting One Pack at a Time
+            </span>
           </span>
         </Link>
 

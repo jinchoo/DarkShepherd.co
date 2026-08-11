@@ -1,26 +1,34 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { navigateWithViewTransition } from "@/lib/viewTransition";
 
 type CalendlyScheduleButtonProps = {
   className?: string;
   children: React.ReactNode;
 };
 
-const CALENDLY_EVENT_URL = "https://calendly.com/jin-darkshepherd/30min";
+const BETA_HREF = "/join-the-beta";
 
 export function CalendlyScheduleButton({
   className,
   children,
 }: CalendlyScheduleButtonProps) {
+  const router = useRouter();
+
   return (
-    <a
+    <Link
       className={`${className ?? ""} no-underline`}
-      href={CALENDLY_EVENT_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={BETA_HREF}
+      onClick={(e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        navigateWithViewTransition(router, BETA_HREF);
+      }}
     >
       {children}
-    </a>
+    </Link>
   );
 }

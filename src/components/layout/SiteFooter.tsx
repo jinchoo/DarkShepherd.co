@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { DispatchSignup } from "@/components/DispatchSignup";
 import { SiteContainer } from "./SiteContainer";
 
 type FooterLink = {
@@ -30,8 +29,7 @@ const footerColumns: FooterColumn[] = [
       { label: "Contact", href: "mailto:jin@darkshepherd.co", external: true },
       {
         label: "Join the Beta",
-        href: "https://calendly.com/jin-darkshepherd/30min",
-        external: true,
+        href: "/join-the-beta",
       },
     ],
   },
@@ -215,7 +213,9 @@ export function SiteFooter() {
                 </p>
               </div>
 
-              <DispatchSignup />
+              <p className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-medium tracking-[0.04em] text-slate-300/90">
+                The Pack is Getting Ready
+              </p>
             </div>
           </div>
         </div>
