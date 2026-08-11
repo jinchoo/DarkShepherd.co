@@ -178,7 +178,7 @@ export default function JoinTheBetaPage() {
         </div>
 
         <SiteContainer className="relative z-10 pt-24 pb-6 sm:pt-28 sm:pb-8">
-          <div className="grid items-center gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+          <div className="grid items-center gap-5 lg:grid-cols-[1fr_1fr] lg:gap-6">
             <div className="max-w-xl">
               <div className="flex flex-col gap-1">
                 <p
@@ -209,7 +209,7 @@ export default function JoinTheBetaPage() {
               </p>
             </div>
 
-            <div className="mx-auto w-full max-w-md lg:mx-0 lg:justify-self-end">
+            <div className="mx-auto w-full max-w-md lg:mx-0 lg:justify-self-start lg:-translate-x-14 xl:-translate-x-24">
               <div className="rounded-2xl border border-white/12 bg-black/65 p-3.5 shadow-[0_20px_60px_rgba(0,0,0,0.55)] backdrop-blur-md sm:p-4">
                 <div className="flex items-center justify-between gap-3">
                   <h2 className="text-sm font-semibold text-white">
