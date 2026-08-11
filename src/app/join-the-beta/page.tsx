@@ -181,7 +181,9 @@ export default function JoinTheBetaPage() {
           <div className="grid items-center gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
             <div className="max-w-xl">
               <div className="flex flex-col gap-1">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-200 sm:text-xs">
+                <p
+                  className="inline-block w-fit bg-gradient-to-r from-[#ffe9a8] via-[#f0b429] to-[#d97706] bg-clip-text text-sm font-semibold uppercase tracking-[0.16em] text-transparent [-webkit-text-fill-color:transparent] sm:text-[15px]"
+                >
                   BETA — ON THE SCENT
                 </p>
                 <p className="text-sm font-medium text-slate-300 sm:text-base">
@@ -190,7 +192,9 @@ export default function JoinTheBetaPage() {
               </div>
 
               <h1 className="mt-3 text-balance text-4xl font-bold leading-[1.06] tracking-[-0.02em] sm:text-5xl lg:text-[3.1rem]">
-                <span className="text-white">Join the </span>
+                <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+                  Join the{" "}
+                </span>
                 <span className={goldText}>DarkShepherd Beta</span>
               </h1>
 
