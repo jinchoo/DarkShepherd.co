@@ -167,46 +167,84 @@ export default function ProductPage() {
               </ul>
             </div>
 
-            <div className="min-w-0 rounded-2xl border border-white/10 bg-[#080b16]/95 p-5 shadow-[0_30px_80px_rgba(0,0,0,0.5)] backdrop-blur sm:p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-base font-semibold text-slate-100">
+            <div className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-[#080b16]/95 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.5)] backdrop-blur sm:p-6">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <h3 className="min-w-0 text-sm font-semibold text-slate-100 sm:text-base">
                   Orders Needing Attention
                 </h3>
-                <button className="text-[12px] font-medium text-amber-300/90 underline-offset-2 hover:underline">
+                <button className="shrink-0 text-[12px] font-medium text-amber-300/90 underline-offset-2 hover:underline">
                   View all
                 </button>
               </div>
 
-              <div className="grid grid-cols-[4.5rem_minmax(0,1fr)_3rem_4.5rem_7.25rem] items-center gap-x-4 border-b border-white/10 pb-2 text-[11px] font-medium uppercase tracking-wide text-slate-500">
-                <span>Order</span>
-                <span>Issue</span>
-                <span className="text-right">Age</span>
-                <span className="text-right">Total</span>
-                <span className="text-center">Action</span>
-              </div>
-              <ul className="divide-y divide-white/5">
+              {/* Mobile: stacked cards */}
+              <ul className="space-y-2.5 md:hidden">
                 {attentionOrders.map((o) => (
                   <li
                     key={o.id}
-                    className="grid grid-cols-[4.5rem_minmax(0,1fr)_3rem_4.5rem_7.25rem] items-center gap-x-4 py-3"
+                    className="rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2.5"
                   >
-                    <span className="text-[13px] font-semibold text-slate-100">{o.id}</span>
-                    <span className="min-w-0 truncate text-[13px] text-slate-300">{o.issue}</span>
-                    <span className="text-right text-[12px] text-slate-400">{o.age}</span>
-                    <span className="text-right text-[12px] text-slate-300">{o.total}</span>
-                    <button
-                      className={[
-                        "justify-self-center rounded-md px-3 py-1.5 text-[11px] font-semibold",
-                        o.variant === "gold"
-                          ? "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-slate-950"
-                          : "border border-amber-400/40 text-amber-300",
-                      ].join(" ")}
-                    >
-                      {o.action}
-                    </button>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-[13px] font-semibold text-slate-100">{o.id}</p>
+                        <p className="mt-0.5 text-[12px] leading-snug text-slate-300">{o.issue}</p>
+                      </div>
+                      <button
+                        className={[
+                          "shrink-0 rounded-md px-2.5 py-1.5 text-[11px] font-semibold",
+                          o.variant === "gold"
+                            ? "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-slate-950"
+                            : "border border-amber-400/40 text-amber-300",
+                        ].join(" ")}
+                      >
+                        {o.action}
+                      </button>
+                    </div>
+                    <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-400">
+                      <span>Age {o.age}</span>
+                      <span aria-hidden className="text-slate-600">
+                        •
+                      </span>
+                      <span>{o.total}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
+
+              {/* Desktop / tablet: table */}
+              <div className="hidden md:block">
+                <div className="grid grid-cols-[4.5rem_minmax(0,1fr)_3rem_4.5rem_7.25rem] items-center gap-x-4 border-b border-white/10 pb-2 text-[11px] font-medium uppercase tracking-wide text-slate-500">
+                  <span>Order</span>
+                  <span>Issue</span>
+                  <span className="text-right">Age</span>
+                  <span className="text-right">Total</span>
+                  <span className="text-center">Action</span>
+                </div>
+                <ul className="divide-y divide-white/5">
+                  {attentionOrders.map((o) => (
+                    <li
+                      key={o.id}
+                      className="grid grid-cols-[4.5rem_minmax(0,1fr)_3rem_4.5rem_7.25rem] items-center gap-x-4 py-3"
+                    >
+                      <span className="text-[13px] font-semibold text-slate-100">{o.id}</span>
+                      <span className="min-w-0 truncate text-[13px] text-slate-300">{o.issue}</span>
+                      <span className="text-right text-[12px] text-slate-400">{o.age}</span>
+                      <span className="text-right text-[12px] text-slate-300">{o.total}</span>
+                      <button
+                        className={[
+                          "justify-self-center rounded-md px-3 py-1.5 text-[11px] font-semibold",
+                          o.variant === "gold"
+                            ? "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-slate-950"
+                            : "border border-amber-400/40 text-amber-300",
+                        ].join(" ")}
+                      >
+                        {o.action}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <p className="mt-3 text-[12px] text-slate-500">Showing 1–5 of 23</p>
             </div>
           </section>

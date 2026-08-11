@@ -209,7 +209,7 @@ export default function JoinTheBetaPage() {
               </p>
             </div>
 
-            <div className="mx-auto w-full max-w-md lg:mx-0 lg:justify-self-start lg:-translate-x-14 xl:-translate-x-24">
+            <div className="mx-auto w-full max-w-md lg:mx-0 lg:justify-self-start lg:-translate-x-10 xl:-translate-x-16">
               <div className="rounded-2xl border border-white/12 bg-black/65 p-3.5 shadow-[0_20px_60px_rgba(0,0,0,0.55)] backdrop-blur-md sm:p-4">
                 <div className="flex items-center justify-between gap-3">
                   <h2 className="text-sm font-semibold text-white">
